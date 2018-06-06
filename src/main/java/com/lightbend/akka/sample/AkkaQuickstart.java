@@ -6,6 +6,8 @@ import com.lightbend.akka.sample.Greeter.*;
 
 import java.io.IOException;
 
+import static java.sql.Types.NULL;
+
 public class AkkaQuickstart {
   public static void main(String[] args) {
     final ActorSystem system = ActorSystem.create("helloakka");
@@ -21,18 +23,22 @@ public class AkkaQuickstart {
         system.actorOf(Greeter.props("Good day", printerActor), "goodDayGreeter");
       //#create-actors
 
+
       //#main-send-messages
-      howdyGreeter.tell(new WhoToGreet("Akka"), ActorRef.noSender());
-      howdyGreeter.tell(new Greet(), ActorRef.noSender());
+      do {
+        howdyGreeter.tell(new WhoToGreet("Akka"), ActorRef.noSender());
+        howdyGreeter.tell(new Greet(), ActorRef.noSender());
 
-      howdyGreeter.tell(new WhoToGreet("Lightbend"), ActorRef.noSender());
-      howdyGreeter.tell(new Greet(), ActorRef.noSender());
+        howdyGreeter.tell(new WhoToGreet("Lightbend"), ActorRef.noSender());
+        howdyGreeter.tell(new Greet(), ActorRef.noSender());
 
-      helloGreeter.tell(new WhoToGreet("Java"), ActorRef.noSender());
-      helloGreeter.tell(new Greet(), ActorRef.noSender());
+        helloGreeter.tell(new WhoToGreet("Java"), ActorRef.noSender());
+        helloGreeter.tell(new Greet(), ActorRef.noSender());
 
-      goodDayGreeter.tell(new WhoToGreet("Play"), ActorRef.noSender());
-      goodDayGreeter.tell(new Greet(), ActorRef.noSender());
+        goodDayGreeter.tell(new WhoToGreet("Play"), ActorRef.noSender());
+        goodDayGreeter.tell(new Greet(), ActorRef.noSender());
+
+      }while (System.in.available() == 0);
       //#main-send-messages
 
       System.out.println(">>> Press ENTER to exit <<<");
