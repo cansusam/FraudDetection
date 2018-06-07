@@ -4,9 +4,11 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import com.lightbend.akka.sample.Terminal_idInit.receivedAmount;
+import com.lightbend.akka.sample.transactionList.receivedCardInitialization;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 //#Cart-messages
@@ -26,16 +28,35 @@ public class Card_SimpleInit extends AbstractActor {
         return Props.create(Card_SimpleInit.class, () -> new Card_SimpleInit());
     }
 
+    /**
+     * Sending transaction information
+     */
     static public class Transaction {
         private Integer amount;
         private ActorRef terminalActor;
-        public Transaction(Integer amount, ActorRef terminalActor) {
+        private ActorRef transactionListActor;
+
+        /**
+         * Payment amount with using which device
+         * @param amount
+         * @param terminalActor
+         */
+        public Transaction(Integer amount, ActorRef terminalActor, ActorRef transactionListActor) {
             this.amount = amount;
             this.terminalActor = terminalActor;
+            this.transactionListActor = transactionListActor;
         }
     }
     //#Card-messages
 
+
+    static public class recordToList {
+        private ActorRef transactionList;
+        public recordToList(ActorRef transactionList) {
+            this.transactionList = transactionList;
+        }
+    }
+    //#Card-messages
 
     private final Integer id;
     private final Integer limit;
@@ -58,9 +79,12 @@ public class Card_SimpleInit extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(Transaction.class, x -> {
-                    //#Card-send-message
-                    x.terminalActor.tell(new receivedAmount(x.amount,id), getSelf());
-                    //#Card-send-message
+                    // Send message of transaction to the related terminal
+                    x.terminalActor.tell(new receivedAmount(x.amount,id,x.transactionListActor), getSelf());
+                })
+                .match(recordToList.class, list ->{
+                    String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
+                    list.transactionList.tell(new receivedCardInitialization(limit,id,timeStamp),getSelf());
                 })
                 .matchAny(o -> log.info("received unknown message"))
                 .build();
