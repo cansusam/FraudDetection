@@ -3,16 +3,15 @@ package com.lightbend.akka.sample;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.testkit.javadsl.TestKit;
-import com.lightbend.akka.sample.Greeter.*;
-import com.lightbend.akka.sample.Printer.*;
-
-import static org.junit.Assert.assertEquals;
-
+import com.lightbend.akka.sample.Card.*;
+import com.lightbend.akka.sample.Terminal.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AkkaQuickstartTest {
+import static org.junit.Assert.assertEquals;
+
+public class BasicTransactionTest {
     static ActorSystem system;
 
     @BeforeClass
@@ -27,23 +26,13 @@ public class AkkaQuickstartTest {
     }
 
     @Test
-    public void testGreeterActorSendingOfGreeting() {
-        final TestKit testProbe = new TestKit(system);
-        final ActorRef helloGreeter = system.actorOf(Greeter.props("Hello", testProbe.getRef()));
-        helloGreeter.tell(new WhoToGreet("Akka"), ActorRef.noSender());
-        helloGreeter.tell(new Greet(), ActorRef.noSender());
-        Greeting greeting = testProbe.expectMsgClass(Greeting.class);
-        assertEquals("Hello, Akka", greeting.message);
-    }
-
-    @Test
     public void testCardRequestTransaction() {
         final TestKit testProbe = new TestKit(system);
         final ActorRef card1 = system.actorOf(Card.props(100, testProbe.getRef()));
-        card1.tell(new WhoToGreet("Akka"), ActorRef.noSender());
-        helloGreeter.tell(new Greet(), ActorRef.noSender());
-        Greeting greeting = testProbe.expectMsgClass(Greeting.class);
-        assertEquals("Hello, Akka", greeting.message);
+        //card1.tell(new whichTerminal(1), ActorRef.noSender());
+        card1.tell(new Transaction(), ActorRef.noSender());
+        receivedAmount terminal1 = testProbe.expectMsgClass(receivedAmount.class);
+        assertEquals(new Integer(100), terminal1.amount);
     }
 
 }
