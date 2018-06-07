@@ -58,8 +58,10 @@ public class Card extends AbstractActor {
         this.id = idCounter; // each Card will have unique ID
         idCounter++;
 
+        // TODO lower limits should be more common
         Random rn = new Random(); // assign random limit
-        this.limit = limitPool[rn.nextInt()%4];
+        int rand = rn.nextInt(limitPool.length);
+        this.limit = limitPool[rand];
     }
 
     @Override
@@ -67,7 +69,7 @@ public class Card extends AbstractActor {
         return receiveBuilder()
                 .match(Transaction.class, x -> {
                     //#Card-send-message
-                    terminalActor.tell(new receivedAmount(amount), getSelf());
+                    terminalActor.tell(new receivedAmount(amount,id), getSelf());
                     //#Card-send-message
                 })
                 .matchAny(o -> log.info("received unknown message"))
