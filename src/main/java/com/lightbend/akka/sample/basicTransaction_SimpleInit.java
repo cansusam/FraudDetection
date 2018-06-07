@@ -2,34 +2,45 @@ package com.lightbend.akka.sample;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import com.lightbend.akka.sample.Card.*;
-import com.lightbend.akka.sample.Terminal.*;
+import com.lightbend.akka.sample.Card.Transaction;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import static java.sql.Types.NULL;
-
-public class basicTransaction {
+public class basicTransaction_SimpleInit {
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("transactions");
         try {
 
-            final ActorRef terminalActor = system.actorOf(Terminal.props());
-            final ActorRef cardActor = system.actorOf(Card.props(100,terminalActor));
-            final ActorRef cardActor1 = system.actorOf(Card.props(200,terminalActor));
-            final ActorRef cardActor2 = system.actorOf(Card.props(300,terminalActor));
-            final ActorRef cardActor3 = system.actorOf(Card_SimpleInit.props());
+            final List<ActorRef> terminalList = new ArrayList<ActorRef>();
+            final List<ActorRef> cardList = new ArrayList<ActorRef>();
+
+            int terminalNumber = 4; // TODO adapt for the tasks
+            for(int i=0; i<terminalNumber;i++)
+                terminalList.add(system.actorOf(Terminal_idInit.props(i)));
+
+            int cardNumber = 10; // TODO adapt for the tasks
+            for (int i = 0; i<cardNumber; i++)
+                cardList.add(system.actorOf(Card_SimpleInit.props()));
+
+
+            int amountList[] = {1,10,100,1000};
             //#create-actors
 
             //#main-send-messages
-//            do {
-                cardActor.tell(new Card.Transaction(), ActorRef.noSender());
-                cardActor1.tell(new Card.Transaction(), ActorRef.noSender());
-                cardActor2.tell(new Card.Transaction(), ActorRef.noSender());
-                cardActor.tell(new Card.Transaction(), ActorRef.noSender());
-                cardActor2.tell(new Card.Transaction(), ActorRef.noSender());
-                cardActor3.tell(new Card_SimpleInit.Transaction(500,terminalActor),ActorRef.noSender());
-//            }while (System.in.available() == 0);
+            do {
+//            int numberOfTransactions = 20;
+//            for (int i=0; i<numberOfTransactions; i++) {
+                Random rn = new Random();
+                int randomCard = rn.nextInt(cardNumber);
+                int randomAmount = rn.nextInt(amountList.length);
+                int randomTerminal = rn.nextInt(terminalNumber);
+                cardList.get(randomCard).tell(new Card_SimpleInit.Transaction(amountList[randomAmount],terminalList.get(randomTerminal)),ActorRef.noSender());
+//            }
+
+            }while (System.in.available() == 0);
             //#main-send-messages
 
             System.out.println(">>> Press ENTER to exit <<<");
