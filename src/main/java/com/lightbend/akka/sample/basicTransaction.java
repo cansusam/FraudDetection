@@ -2,7 +2,8 @@ package com.lightbend.akka.sample;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import com.lightbend.akka.sample.Greeter.*;
+import com.lightbend.akka.sample.Card.*;
+import com.lightbend.akka.sample.Terminal.*;
 
 import java.io.IOException;
 
