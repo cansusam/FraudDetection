@@ -28,7 +28,7 @@ public class basicTransaction {
                 cardActor2.tell(new Card.Transaction(), ActorRef.noSender());
                 cardActor.tell(new Card.Transaction(), ActorRef.noSender());
                 cardActor2.tell(new Card.Transaction(), ActorRef.noSender());
-                cardActor3.tell(new Card_SimpleInit.Transaction(500,terminalActor),ActorRef.noSender());
+//                cardActor3.tell(new Card_SimpleInit.Transaction(500,terminalActor),ActorRef.noSender());
 //            }while (System.in.available() == 0);
             //#main-send-messages
 
