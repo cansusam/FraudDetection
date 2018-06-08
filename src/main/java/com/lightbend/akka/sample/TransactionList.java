@@ -47,11 +47,11 @@ public class TransactionList extends AbstractActor {
      * balanceList keeps cards balance list.
      * Wrapper can be used instead of List.
      */
-    private final HashMap<Integer, List<Integer>> balanceList = new HashMap<Integer, List<Integer>>();
+    private final HashMap<Integer, BalanceListElement> balanceList = new HashMap<Integer, BalanceListElement>();
     /**
      * TransactionList keeps all transaction logs weather it is valid or not.
      */
-    private final List<List<Integer>> transactionList = new ArrayList<>();
+    private final List<TransactionListElement> transactionList = new ArrayList<>();
 
     /**
      * Transactions received by terminals are kept in the list.
@@ -92,9 +92,8 @@ public class TransactionList extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(receivedTransaction.class, received -> {
-                    // balance value kept in 4th element
-                    List<Integer> cardValues = balanceList.get(received.cardID);
-                    int balance = cardValues.get(3);
+                    BalanceListElement cardValues = balanceList.get(received.cardID);
+                    int balance = cardValues.balance;
                     int validity = 1;
                     int newBalance = balance;
                     if (balance >= received.amount) {
@@ -102,7 +101,7 @@ public class TransactionList extends AbstractActor {
                         newBalance = balance - received.amount;
                         // log.info("\n#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance + " - CardID : " + received.cardID);
                         System.out.println("#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance + " - CardID : " + received.cardID);
-                        cardValues.set(3,newBalance);
+                        cardValues.balance = newBalance;
                         balanceList.put(received.cardID,cardValues);
                     } else {
                         // not valid
@@ -111,25 +110,8 @@ public class TransactionList extends AbstractActor {
                         System.out.println("#Non-Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Balance : " + balance + " - CardID : " + received.cardID);
                     }
 
-                    // TODO do it with wrapper class!
-                    /**
-                     * Transaction list details
-                     * 1- CardID
-                     * 2- TerminalID
-                     * 3- Amount
-                     * 4- Balance
-                     * 5- Remaining
-                     * 6- Validity (1:True, 0:False)
-                     * 7- Date
-                     */
-                    List<Integer> transactionValues = new ArrayList<>();
-                    transactionValues.add(received.cardID);
-                    transactionValues.add(received.terminalID);
-                    transactionValues.add(received.amount);
-                    transactionValues.add(balance);
-                    transactionValues.add(newBalance);
-                    transactionValues.add(validity);
-                    transactionValues.add(Integer.parseInt(received.date));
+                    TransactionListElement transactionValues = new TransactionListElement(received.cardID,
+                            received.terminalID,received.amount,balance,newBalance,validity,received.date);
 
                     transactionList.add(transactionValues);
                     writerTransactions.tell(new transactionAddLine(transactionValues),getSelf());
@@ -137,19 +119,8 @@ public class TransactionList extends AbstractActor {
                 })
                 .match(receivedCardInitialization.class, received -> {
                     // TODO type of card, house location should be added
-                    // Wrapper class would be better
-                    /**
-                     * Balance list details
-                     * 1- CardID
-                     * 2- Limit
-                     * 3- Date in Integer format
-                     * 4- Balance (Equal to limit at initialization).
-                     */
-                    List<Integer> cardValues = new ArrayList<>();
-                    cardValues.add(received.cardID);
-                    cardValues.add(received.limit);
-                    cardValues.add(Integer.parseInt(received.date));
-                    cardValues.add(received.limit);
+                    BalanceListElement cardValues = new BalanceListElement(received.cardID,
+                            received.limit,received.date,received.limit);
                     balanceList.put(received.cardID,cardValues);
                     //log.info("\nCard information received from Card ID : " + received.cardID + " Card Limit: " + received.limit + " at " + received.date + " - Card initialized.");
                     System.out.println("Card information received from Card ID : " + received.cardID + " Card Limit: " + received.limit + " at " + received.date + " - Card initialized.");

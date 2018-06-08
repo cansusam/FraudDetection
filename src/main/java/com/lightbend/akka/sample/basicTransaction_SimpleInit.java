@@ -16,6 +16,9 @@ public class basicTransaction_SimpleInit {
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("transactions");
         try {
+            //simulation start time recorded
+            TimeConverter.startTime = System.currentTimeMillis();
+
             //list of transactions
             final ActorRef transactions = system.actorOf(TransactionList.props());
             // TODO cards and terminals can be created with another actor
@@ -25,6 +28,7 @@ public class basicTransaction_SimpleInit {
             generateTerminals(terminalList,system);
             generateCards(cardList,transactions,system);
 
+            TimeConverter.timeToDate(System.currentTimeMillis());
             //#main-send-messages
 //            do {
             for (int i=0; i<numberOfTransactions; i++) {
@@ -34,6 +38,8 @@ public class basicTransaction_SimpleInit {
                 int randomTerminal = rn.nextInt(terminalNumber);
                 int randomDuration = rn.nextInt(schedulingDurationsMS.length);
                 system.scheduler().scheduleOnce(Duration.ofMillis(schedulingDurationsMS[randomDuration]),
+//                int randomDuration = rn.nextInt(schedulingDurationsInterval);
+//                system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
                         new Runnable() {
                             @Override
                             public void run() {

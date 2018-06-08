@@ -125,7 +125,8 @@ public class Card_SimpleInit extends AbstractActor {
                     x.terminalActor.tell(new receivedAmount(x.amount,id,x.transactionListActor), getSelf());
                 })
                 .match(recordToList.class, list ->{
-                    String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
+                    //String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
+                    String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());
                     list.transactionList.tell(new receivedCardInitialization(limit,id,timeStamp),getSelf());
                 })
                 .matchAny(o -> log.info("received unknown message"))

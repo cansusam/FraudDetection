@@ -69,7 +69,9 @@ public class Terminal_idInit extends AbstractActor {
                 .match(receivedAmount.class, received -> {
                     //log.debug("\n#Received: Terminal " + id + " - Amount : " + received.amount.toString() + " - CardID : " + received.cardID.toString());
                     //log.info("#Received: Terminal " + id + " - Amount : " + received.amount.toString() + " - CardID : " + received.cardID.toString());
-                    String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
+                    //String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
+                    // TODO create time stamp according to time accelerator
+                    String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());
                     // Direct to the TransactionList // possible to do it directly from card
                     received.transactionList.tell(new receivedTransaction(received.amount,received.cardID,id,timeStamp), getSelf());
                 }) // when request received, this message triggered

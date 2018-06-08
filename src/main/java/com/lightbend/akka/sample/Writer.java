@@ -31,12 +31,15 @@ public class Writer extends AbstractActor {
      * Add new transaction info as a line into the csv file
      */
     static public class transactionAddLine{
-        public transactionAddLine(List<Integer> lineInfo) throws IOException {
-            String line = "";
-            line = lineInfo.get(0).toString();
-            for(int i=1; i<lineInfo.size(); i++){
-                line = line + ","  + lineInfo.get(i).toString();
-            }
+        public transactionAddLine(TransactionListElement lineInfo) throws IOException {
+
+            String line = lineInfo.cardID
+                    + "," + lineInfo.terminalID
+                    + "," + lineInfo.amount
+                    + "," + lineInfo.balance
+                    + "," + lineInfo.remaining
+                    + "," + lineInfo.validity
+                    + "," + lineInfo.date;
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.append("\n"+line);
