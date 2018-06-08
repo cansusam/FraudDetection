@@ -33,14 +33,12 @@ public class basicTransaction_SimpleInit {
                 cardList.get(i).tell(new Card_SimpleInit.recordToList(transactions),ActorRef.noSender());
             }
 
-
-
-            int amountList[] = {1,10,100,1000};
+            int amountList[] = {100,1000,10000};
             //#create-actors
 
             //#main-send-messages
 //            do {
-            int numberOfTransactions = 10;
+            int numberOfTransactions = 100;
             for (int i=0; i<numberOfTransactions; i++) {
                 Random rn = new Random();
                 int randomCard = rn.nextInt(cardNumber);
