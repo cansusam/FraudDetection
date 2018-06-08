@@ -62,17 +62,50 @@ public class Card_SimpleInit extends AbstractActor {
     private final Integer limit;
 
     private Integer[] limitPool = {5000,10000,20000,30000};
+    private Integer[] limitRatios = {4,3,2,1};
 
     public Card_SimpleInit() {
-
-
         this.id = idCounter; // each Card will have unique ID
         idCounter++;
 
-        // TODO lower limits should be more common
+        this.limit = limitPool[limitSelection()];
+    }
+
+    // Select limit according to determined ratios
+    private int limitSelection(){
         Random rn = new Random(); // assign random limit
-        int rand = rn.nextInt(limitPool.length);
-        this.limit = limitPool[rand];
+        double rand;
+        int limitIndex = 0;
+        Double[] limitProbs = calculateLimitProbs();
+        //Calculate
+        rand = rn.nextFloat();
+        for (int i = 0; i < limitPool.length; i++) {
+            if (rand < limitProbs[i]) {
+                limitIndex = i;
+                break;
+            }
+        }
+        return limitIndex;
+    }
+
+    /**
+     * Probabilistic distribution of card limits
+     * @return
+     */
+    private Double[] calculateLimitProbs(){
+        Double[] probArray = new Double[limitRatios.length];
+        Double totalProb = 0.0;
+
+        Double ratiosTotal = 0.0; //
+        for (int i = 0; i < limitRatios.length; i++) {
+            ratiosTotal += limitRatios[i];
+        }
+        for (int i = 0; i < limitRatios.length; i++) {
+            probArray[i] = totalProb + limitRatios[i]/ratiosTotal;
+            totalProb = probArray[i];
+        }
+
+        return probArray;
     }
 
     @Override
