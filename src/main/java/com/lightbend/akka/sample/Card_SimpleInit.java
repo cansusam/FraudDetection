@@ -13,23 +13,16 @@ import java.util.Random;
 
 //#Cart-messages
 public class Card_SimpleInit extends AbstractActor {
-    /**
-     * Transaction: instruction to execute transaction
-     */
-
-
     // used to catch unknown messages sent to this actor
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
-
     private static Integer idCounter = 0;
 
-    //#Cart-messages
     static public Props props() {
         return Props.create(Card_SimpleInit.class, () -> new Card_SimpleInit());
     }
 
     /**
-     * Sending transaction information
+     * Message: Sending transaction information
      */
     static public class Transaction {
         private Integer amount;
@@ -47,19 +40,21 @@ public class Card_SimpleInit extends AbstractActor {
             this.transactionListActor = transactionListActor;
         }
     }
-    //#Card-messages
 
-
+    /**
+     * Message: Record cards to the
+     */
     static public class recordToList {
         private ActorRef transactionList;
         public recordToList(ActorRef transactionList) {
             this.transactionList = transactionList;
         }
     }
-    //#Card-messages
 
     private final Integer id;
     private final Integer limit;
+    private final Kind.cardKind type;
+    private final Integer homeLocation;
 
     private Integer[] limitPool = {5000,10000,20000,30000};
     private Integer[] limitRatios = {4,3,2,1};
@@ -68,7 +63,19 @@ public class Card_SimpleInit extends AbstractActor {
         this.id = idCounter; // each Card will have unique ID
         idCounter++;
 
-        this.limit = limitPool[limitSelection()];
+        // kind of the card, 50/50
+        if(Math.random() < 0.5) {
+            this.type = Kind.cardKind.Debit;
+        }else
+            this.type = Kind.cardKind.Credit;
+
+        if(type == Kind.cardKind.Debit)
+            this.limit = 1000; // Daily limit
+        else
+            this.limit = limitPool[limitSelection()]; // Monthly limit
+
+        Random rn = new Random();
+        this.homeLocation = rn.nextInt(82); // 81 for International
     }
 
     // Select limit according to determined ratios

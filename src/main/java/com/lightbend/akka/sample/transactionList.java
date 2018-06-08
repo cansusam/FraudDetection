@@ -107,6 +107,7 @@ public class transactionList extends AbstractActor {
                         System.out.println("#Non-Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Balance : " + balance + " - CardID : " + received.cardID);
                     }
 
+                    // TODO do it with wrapper class!
                     /**
                      * Transaction list details
                      * 1- CardID

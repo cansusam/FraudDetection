@@ -14,8 +14,8 @@ public class Terminal_idInit extends AbstractActor {
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
     //#Cart-messages
-    static public Props props(Integer id, Kind.terminalKind type) {
-        return Props.create(Terminal_idInit.class, () -> new Terminal_idInit(id,type));
+    static public Props props(Integer id) {
+        return Props.create(Terminal_idInit.class, () -> new Terminal_idInit(id));
     }
 
     /**
@@ -39,18 +39,19 @@ public class Terminal_idInit extends AbstractActor {
     }
 
 //    private static Integer idCounter = 0;
-//    private static Integer atmCounter = 0;
+    private static Integer atmCounter = 0;
+    private enum Kind{ POS, ATM};
     private final Integer id;
-    private final Kind.terminalKind type;
+//    private final Kind type;
 
     /**
      * During static ip creation at actor initialization, some of the actors had same id.
      * Id assignment with argument is a temporary solution.
      * @param id
      */
-    public Terminal_idInit(Integer id, Kind.terminalKind type) {
+    public Terminal_idInit(Integer id) {
         this.id = id;
-        this.type = type;
+
     }
 
     @Override
