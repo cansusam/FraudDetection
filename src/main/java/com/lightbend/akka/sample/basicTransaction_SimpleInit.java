@@ -14,7 +14,6 @@ public class basicTransaction_SimpleInit {
         final ActorSystem system = ActorSystem.create("transactions");
         try {
 
-
             //list of transactions
             final ActorRef transactions = system.actorOf(transactionList.props());
 
