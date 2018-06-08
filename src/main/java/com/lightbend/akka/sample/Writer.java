@@ -6,6 +6,7 @@ import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -26,6 +27,7 @@ public class Writer extends AbstractActor {
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
     static private String fileName;
+    static private String folderName = "outputs";
 
     /**
      * Add new transaction info as a line into the csv file
@@ -52,14 +54,17 @@ public class Writer extends AbstractActor {
      */
     static public class transactionFileCreate {
         public transactionFileCreate() throws IOException {
-            // 1th file is transaction list
+            // Creating folder
+            File folder = new File(folderName);
+            if(!folder.exists())
+                folder.mkdir();
             // CSV file headlines
             String headlines = "CardID,TerminalID,Amount,Balance,Remaining,Validity,Date";
             // File name with date/time
             DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
             df.setTimeZone(TimeZone.getTimeZone("GMT+3"));
             String date = df.format(new Date());
-            fileName = "transactions-" + date + ".csv";
+            fileName = folderName + "/transactions-" + date + ".csv";
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(headlines);
             writer.close();

@@ -2,26 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89801260-26c3-4201-a298-329b97b0e6d3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/BalanceListElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TimeConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Card_SimpleInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Card_SimpleInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Terminal_idInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Terminal_idInit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/basicTransaction_SimpleInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/basicTransaction_SimpleInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Constants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/EnvironmentManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/SimulationMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Terminal_idInit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Terminal_idInit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/TransactionList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/TransactionList.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Writer$transactionAddLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Writer$transactionAddLine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Writer$transactionFileCreate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Writer$transactionFileCreate.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Writer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Writer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/basicTransaction_SimpleInit$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/basicTransaction_SimpleInit$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/basicTransaction_SimpleInit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/basicTransaction_SimpleInit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-151810.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-154113.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-154415.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-163803.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-190237.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-202751.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-203036.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-203146.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-204323.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-204438.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-204632.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-204712.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-215538.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-215819.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-215907.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-215954.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-231749.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-232854.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-232955.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-234613.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-234743.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-235615.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-235659.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180608-235821.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactions-20180609-000041.csv" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,7 +66,7 @@
       <file leaf-file-name="TransactionList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
+            <state relative-caret-position="268">
               <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -64,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Writer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Writer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="197">
+              <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basicTransaction_SimpleInit.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="basicTransaction_SimpleInit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/basicTransaction_SimpleInit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="38" selection-start-line="38" selection-end-line="39" selection-end-column="105" />
+            <state relative-caret-position="347">
+              <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#663#673#0" expanded="true" />
@@ -122,8 +134,8 @@
       <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+            <state relative-caret-position="255">
+              <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -207,12 +219,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/BalanceListElement.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Card_SimpleInit.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Terminal_idInit.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TimeConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/basicTransaction_SimpleInit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" />
       </list>
     </option>
   </component>
@@ -484,7 +496,7 @@
       <workItem from="1528307661908" duration="6109000" />
       <workItem from="1528324163457" duration="294000" />
       <workItem from="1528353359847" duration="26055000" />
-      <workItem from="1528442333412" duration="25734000" />
+      <workItem from="1528442333412" duration="27011000" />
     </task>
     <servers />
   </component>
@@ -521,7 +533,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58192000" />
+    <option name="totallyTimeSpent" value="59469000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -554,9 +566,9 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32859176" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3428165" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3428165" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.33997154" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.26171243" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.26171243" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="7" weight="0.32859176" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
       <window_info anchor="right" id="Gradle" order="3" />
@@ -1029,33 +1041,12 @@ Date a = new Date(milliseconds)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Terminal_idInit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="73" column="92" selection-start-line="73" selection-start-column="92" selection-end-line="73" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1456#1485#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1070,10 +1061,10 @@ Date a = new Date(milliseconds)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/BalanceListElement.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="4" column="62" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
+        <state relative-caret-position="255">
+          <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
         </state>
       </provider>
     </entry>
@@ -1087,20 +1078,41 @@ Date a = new Date(milliseconds)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="63" lean-forward="true" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/basicTransaction_SimpleInit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="38" selection-start-line="38" selection-end-line="39" selection-end-column="105" />
+        <state relative-caret-position="347">
+          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#663#673#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/BalanceListElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="4" column="62" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="58" column="41" selection-start-line="58" selection-start-column="41" selection-end-line="58" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1456#1485#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
