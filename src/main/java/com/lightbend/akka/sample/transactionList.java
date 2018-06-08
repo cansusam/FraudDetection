@@ -1,10 +1,13 @@
 package com.lightbend.akka.sample;
 
 import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import com.lightbend.akka.sample.Writer.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,19 +67,21 @@ public class transactionList extends AbstractActor {
         }
     }
 
-    // TODO
-    static public class printBalanceList{
-
-    }
-
-    // TODO
-    static public class printTransactionList{
-
-    }
+    // It is not necessary
+//    static public class printBalanceList{
+//
+//    }
 
     // constructor
     public transactionList() {
 
+    }
+
+    // Creates its own writerTransactions for transactions
+    final ActorRef writerTransactions = getContext().system().actorOf(Writer.props());
+    @Override
+    public void preStart() throws IOException {
+        writerTransactions.tell(new transactionFileCreate(),getSelf());
     }
 
     @Override
@@ -87,9 +92,10 @@ public class transactionList extends AbstractActor {
                     List<Integer> cardValues = balanceList.get(received.cardID);
                     int balance = cardValues.get(3);
                     int validity = 1;
-                    if (balance > received.amount) {
+                    int newBalance = balance;
+                    if (balance >= received.amount) {
                         // valid
-                        int newBalance = balance - received.amount;
+                        newBalance = balance - received.amount;
                         // log.info("\n#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance + " - CardID : " + received.cardID);
                         System.out.println("#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance + " - CardID : " + received.cardID);
                         cardValues.set(3,newBalance);
@@ -104,21 +110,24 @@ public class transactionList extends AbstractActor {
                     /**
                      * Transaction list details
                      * 1- CardID
-                     * 2- Amount
-                     * 3- Date
-                     * 4- TerminalID
-                     * 5- Balance
+                     * 2- TerminalID
+                     * 3- Amount
+                     * 4- Balance
+                     * 5- Remaining
                      * 6- Validity (1:True, 0:False)
+                     * 7- Date
                      */
                     List<Integer> transactionValues = new ArrayList<>();
                     transactionValues.add(received.cardID);
-                    transactionValues.add(received.amount);
-                    transactionValues.add(Integer.parseInt(received.date));
                     transactionValues.add(received.terminalID);
+                    transactionValues.add(received.amount);
                     transactionValues.add(balance);
+                    transactionValues.add(newBalance);
                     transactionValues.add(validity);
+                    transactionValues.add(Integer.parseInt(received.date));
 
                     transactionList.add(transactionValues);
+                    writerTransactions.tell(new transactionAddLine(transactionValues),getSelf());
 
                 })
                 .match(receivedCardInitialization.class, received -> {
