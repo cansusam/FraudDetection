@@ -4,7 +4,7 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import com.lightbend.akka.sample.Terminal_idInit.receivedAmount;
-import com.lightbend.akka.sample.transactionList.receivedCardInitialization;
+import com.lightbend.akka.sample.TransactionList.receivedCardInitialization;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
@@ -15,14 +15,13 @@ import java.util.Random;
 public class Card_SimpleInit extends AbstractActor {
     // used to catch unknown messages sent to this actor
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
-    private static Integer idCounter = 0;
 
     static public Props props() {
         return Props.create(Card_SimpleInit.class, () -> new Card_SimpleInit());
     }
 
     /**
-     * Message: Sending transaction information
+     * Message: Sending transaction information to the terminal
      */
     static public class Transaction {
         private Integer amount;
@@ -42,7 +41,8 @@ public class Card_SimpleInit extends AbstractActor {
     }
 
     /**
-     * Message: Record cards to the
+     * Message: Record cards to the list in transactionlist actor right after initializing the card.
+     * This list only keeps all card information with their balance value.
      */
     static public class recordToList {
         private ActorRef transactionList;
@@ -51,11 +51,11 @@ public class Card_SimpleInit extends AbstractActor {
         }
     }
 
+    private static Integer idCounter = 0;
     private final Integer id;
     private final Integer limit;
     private final Kind.cardKind type;
     private final Integer homeLocation;
-
     private Integer[] limitPool = {5000,10000,20000,30000};
     private Integer[] limitRatios = {4,3,2,1};
 
@@ -78,7 +78,9 @@ public class Card_SimpleInit extends AbstractActor {
         this.homeLocation = rn.nextInt(82); // 81 for International
     }
 
-    // Select limit according to determined ratios
+    /**
+     * Select limit according to determined ratios
+     */
     private int limitSelection(){
         Random rn = new Random(); // assign random limit
         double rand;

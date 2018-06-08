@@ -25,12 +25,10 @@ public class Writer extends AbstractActor {
 
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
-    static private DateFormat df;
-    static private String date;
     static private String fileName;
 
     /**
-     * add new transaction line
+     * Add new transaction info as a line into the csv file
      */
     static public class transactionAddLine{
         public transactionAddLine(List<Integer> lineInfo) throws IOException {
@@ -55,9 +53,9 @@ public class Writer extends AbstractActor {
             // CSV file headlines
             String headlines = "CardID,TerminalID,Amount,Balance,Remaining,Validity,Date";
             // File name with date/time
-            df = new SimpleDateFormat("yyyyMMdd-HHmmss");
+            DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
             df.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-            date = df.format(new Date());
+            String date = df.format(new Date());
             fileName = "transactions-" + date + ".csv";
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(headlines);

@@ -2,7 +2,8 @@ package com.lightbend.akka.sample;
 
 
 /**
- * Different types of cards and terminals
+ * Instead of using numbers for each type,
+ * card and terminal kinds defined.
  */
 public class Kind {
     public enum cardKind {Debit, Credit}

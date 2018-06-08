@@ -2,27 +2,22 @@ package com.lightbend.akka.sample;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
-import akka.actor.dsl.Creators;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.lightbend.akka.sample.Constants.*;
 
 public class basicTransaction_SimpleInit {
-
-    private static final int atmLimit = 81;
-    private static final int terminalNumber = 4;
-    private static final int cardNumber = 10;
-    private static final int amountList[] = {100,1000,10000};
 
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("transactions");
         try {
-
             //list of transactions
-            final ActorRef transactions = system.actorOf(transactionList.props());
+            final ActorRef transactions = system.actorOf(TransactionList.props());
             // TODO cards and terminals can be created with another actor
             final List<ActorRef> terminalList = new ArrayList<ActorRef>();
             final List<ActorRef> cardList = new ArrayList<ActorRef>();
@@ -32,13 +27,20 @@ public class basicTransaction_SimpleInit {
 
             //#main-send-messages
 //            do {
-            int numberOfTransactions = 100;
             for (int i=0; i<numberOfTransactions; i++) {
                 Random rn = new Random();
                 int randomCard = rn.nextInt(cardNumber);
                 int randomAmount = rn.nextInt(amountList.length);
                 int randomTerminal = rn.nextInt(terminalNumber);
-                cardList.get(randomCard).tell(new Card_SimpleInit.Transaction(amountList[randomAmount],terminalList.get(randomTerminal),transactions),ActorRef.noSender());
+                int randomDuration = rn.nextInt(schedulingDurationsMS.length);
+                system.scheduler().scheduleOnce(Duration.ofMillis(schedulingDurationsMS[randomDuration]),
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                cardList.get(randomCard).tell(new Card_SimpleInit.Transaction(amountList[randomAmount],terminalList.get(randomTerminal),transactions),ActorRef.noSender());
+                            }
+                        }, system.dispatcher());
+                //
             }
 //            }while (System.in.available() == 0);
             //#main-send-messages
