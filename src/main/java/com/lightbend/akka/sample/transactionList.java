@@ -83,21 +83,22 @@ public class transactionList extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(receivedTransaction.class, received -> {
-                    //log.info("#Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - CardID : " + received.cardID);
-
                     // balance value kept in 4th element
                     List<Integer> cardValues = balanceList.get(received.cardID);
                     int balance = cardValues.get(3);
                     int validity = 1;
                     if (balance > received.amount) {
                         // valid
-                        log.info("#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - CardID : " + received.cardID);
-                        cardValues.set(3,balance - received.amount);
+                        int newBalance = balance - received.amount;
+                        // log.info("\n#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance + " - CardID : " + received.cardID);
+                        System.out.println("#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance + " - CardID : " + received.cardID);
+                        cardValues.set(3,newBalance);
                         balanceList.put(received.cardID,cardValues);
                     } else {
                         // not valid
                         validity = 0;
-                        log.info("#Non-Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - CardID : " + received.cardID);
+                        //log.info("\n#Non-Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Balance : " + balance + " - CardID : " + received.cardID);
+                        System.out.println("#Non-Valid Transaction Received: Terminal " + received.terminalID + " - Amount : " + received.amount + " - Balance : " + balance + " - CardID : " + received.cardID);
                     }
 
                     /**
@@ -136,7 +137,8 @@ public class transactionList extends AbstractActor {
                     cardValues.add(Integer.parseInt(received.date));
                     cardValues.add(received.limit);
                     balanceList.put(received.cardID,cardValues);
-                    log.info("Card information received from Card ID : " + received.cardID + " at " + received.date);
+                    //log.info("\nCard information received from Card ID : " + received.cardID + " Card Limit: " + received.limit + " at " + received.date + " - Card initialized.");
+                    System.out.println("Card information received from Card ID : " + received.cardID + " Card Limit: " + received.limit + " at " + received.date + " - Card initialized.");
                 })
                 .matchAny(o -> log.info("received unknown message"))
                 .build();
