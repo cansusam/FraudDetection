@@ -4,6 +4,7 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import com.lightbend.akka.sample.TerminalActor.receivedAmount;
+import com.lightbend.akka.sample.TerminalActor.validReceivedAmount;
 import com.lightbend.akka.sample.TransactionList.receivedCardInitialization;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
@@ -42,6 +43,28 @@ public class CardActor extends AbstractActor {
             this.amount = amount;
             this.terminalActor = terminalActor;
             this.transactionListActor = transactionListActor;
+        }
+    }
+
+    /**
+     * Message: Sending transaction information to the terminal
+     */
+    static public class ValidTransaction {
+        private Integer amount;
+        private ActorRef terminalActor;
+        private ActorRef transactionListActor;
+        private Integer valid;
+
+        /**
+         * Payment amount with using which device
+         * @param amount
+         * @param terminalActor
+         */
+        public ValidTransaction(Integer amount, ActorRef terminalActor, ActorRef transactionListActor,Integer valid) {
+            this.amount = amount;
+            this.terminalActor = terminalActor;
+            this.transactionListActor = transactionListActor;
+            this.valid = valid;
         }
     }
 
@@ -126,6 +149,10 @@ public class CardActor extends AbstractActor {
                 .match(Transaction.class, x -> {
                     // Send message of transaction to the related terminal
                     x.terminalActor.tell(new receivedAmount(x.amount,id,x.transactionListActor), getSelf());
+                })
+                .match(ValidTransaction.class, x -> {
+                    // Send message of transaction to the related terminal
+                    x.terminalActor.tell(new validReceivedAmount(x.amount,id,x.transactionListActor,x.valid), getSelf());
                 })
                 .match(recordToList.class, list ->{
                     String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());

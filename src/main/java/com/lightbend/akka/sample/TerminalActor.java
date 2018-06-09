@@ -6,6 +6,7 @@ import akka.actor.Props;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import com.lightbend.akka.sample.TransactionList.receivedTransaction;
+import com.lightbend.akka.sample.TransactionList.validReceivedTransaction;
 
 import java.util.Random;
 
@@ -37,6 +38,27 @@ public class TerminalActor extends AbstractActor {
             this.amount = amount;
             this.cardID = cardID;
             this.transactionList = transactionList;
+        }
+    }
+
+    /**
+     * Card request receiver.
+     * Terminal receives a request from a card.
+     * Directs the cards' and its own information to TransactionList,
+     * where all transactions are recorded and validity decision made.
+     */
+    static public class validReceivedAmount {
+        public final Integer amount;
+        public final Integer cardID;
+        public final Integer valid;
+        private ActorRef transactionList;
+
+
+        public validReceivedAmount(Integer amount, Integer cardID, ActorRef transactionList,Integer valid) {
+            this.amount = amount;
+            this.cardID = cardID;
+            this.transactionList = transactionList;
+            this.valid = valid;
         }
     }
 
@@ -85,6 +107,11 @@ public class TerminalActor extends AbstractActor {
                     received.transactionList.tell(new receivedTransaction(received.amount,received.cardID,id,timeStamp),
                             getSelf());
                 }) // when request received, this message triggered
+                .match(validReceivedAmount.class, received -> {
+                    String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());
+                    received.transactionList.tell(new validReceivedTransaction(received.amount,received.cardID,id,timeStamp,received.valid),
+                            getSelf());
+                })
                 .match(recordToList.class, list ->{
                     TerminalListElement terminalInfo = new TerminalListElement(id,type,merchantCategory);
                     list.transactionList.tell(new TransactionList.receivedTerminalInitialization(terminalInfo),getSelf());

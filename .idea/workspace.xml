@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89801260-26c3-4201-a298-329b97b0e6d3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/Constants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/TransactionSimulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lightbend/akka/sample/TransactionSimulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,37 +27,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TransactionSimulator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TerminalActor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="111" column="60" lean-forward="true" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransactionList.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14">
+              <caret line="279" column="23" selection-start-line="279" selection-start-column="23" selection-end-line="279" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransactionSimulator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="202" column="83" selection-start-line="202" selection-start-column="83" selection-end-line="202" selection-end-column="83" />
+            <state relative-caret-position="211">
+              <caret line="221" column="72" lean-forward="true" selection-start-line="221" selection-start-column="72" selection-end-line="221" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#821#831#0" expanded="true" />
                 <element signature="e#892#902#0" expanded="true" />
+                <element signature="e#6614#6635#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransactionList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1623">
-              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransactionListElement.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -66,8 +69,20 @@
       <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+            <state relative-caret-position="143">
+              <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CardActor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,9 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>printer</find>
-      <find>builder</find>
-      <find>greeting</find>
       <find>amount</find>
       <find>card</find>
       <find>terminalActor</find>
@@ -113,6 +125,9 @@
       <find>error</find>
       <find>windo</find>
       <find>discreteSchedulingTransactions</find>
+      <find>validity</find>
+      <find>isv</find>
+      <find>validTra</find>
     </findStrings>
     <replaceStrings>
       <replace>writer</replace>
@@ -152,19 +167,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Terminal_idInit.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Card_SimpleInit.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/lightbend/akka/sample/BasicTransactionTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TimeConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalListElement.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardBalanceListElement.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardFeatureDistributions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java" />
       </list>
     </option>
   </component>
@@ -416,7 +431,7 @@
       <workItem from="1528324163457" duration="294000" />
       <workItem from="1528353359847" duration="26055000" />
       <workItem from="1528442333412" duration="31368000" />
-      <workItem from="1528520335980" duration="36549000" />
+      <workItem from="1528520335980" duration="40523000" />
     </task>
     <servers />
   </component>
@@ -453,7 +468,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100375000" />
+    <option name="totallyTimeSpent" value="104349000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -479,14 +494,14 @@
       <window_info id="Structure" order="1" sideWeight="0.5011601" side_tool="true" weight="0.25767368" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.31863442" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.46372688" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32859176" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.32859176" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32859176" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20768137" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2802276" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.33997154" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.24394184" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="7" weight="0.32859176" />
@@ -522,47 +537,22 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java</url>
-          <line>39</line>
-          <properties />
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java</url>
-          <line>117</line>
+          <line>239</line>
           <properties />
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java</url>
-          <line>270</line>
-          <properties />
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java</url>
-          <line>266</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java</url>
-          <line>197</line>
-          <properties />
-          <option name="timeStamp" value="40" />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="44" />
+      <option name="time" value="79" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="log" language="JAVA" />
-        <watch expression="log" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>cardFeatureDistributions.get(randomCard)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>((EnumeratedIntegerDistribution) dist).innerDistribution.</expression-string>
         <language-id>JAVA</language-id>
@@ -605,31 +595,9 @@ Date a = new Date(milliseconds)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>rn.nextInt(2)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>rn.nextInt(1)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/primitive/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Printer.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/SimulationMain.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/primitive/Terminal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -815,16 +783,6 @@ Date a = new Date(milliseconds)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="55" column="35" lean-forward="true" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
@@ -842,30 +800,10 @@ Date a = new Date(milliseconds)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="88" column="44" selection-start-line="88" selection-start-column="23" selection-end-line="88" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Kind.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -878,50 +816,102 @@ Date a = new Date(milliseconds)</expression-string>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalListElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+        <state relative-caret-position="109">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        <state relative-caret-position="306">
+          <caret line="30" column="35" lean-forward="true" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1623">
-          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="55" />
+        <state relative-caret-position="141">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.12/2.5.13/akka-actor_2.12-2.5.13.jar!/akka/actor/LightArrayRevolverScheduler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.12/2.5.13/akka-actor_2.12-2.5.13.jar!/akka/util/JavaDurationConverters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.12/2.5.13/akka-actor_2.12-2.5.13.jar!/akka/actor/Scheduler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="202" column="83" selection-start-line="202" selection-start-column="83" selection-end-line="202" selection-end-column="83" />
+        <state relative-caret-position="211">
+          <caret line="221" column="72" lean-forward="true" selection-start-line="221" selection-start-column="72" selection-end-line="221" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#821#831#0" expanded="true" />
             <element signature="e#892#902#0" expanded="true" />
+            <element signature="e#6614#6635#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="111" column="60" lean-forward="true" selection-start-line="111" selection-start-column="60" selection-end-line="111" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="279" column="23" selection-start-line="279" selection-start-column="23" selection-end-line="279" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

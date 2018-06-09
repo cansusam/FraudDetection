@@ -49,6 +49,25 @@ public class TransactionList extends AbstractActor {
     }
 
     /**
+     * Transactions received by terminals are kept in the list.
+     */
+    static public class validReceivedTransaction {
+        public final Integer amount;
+        public final Integer cardID;
+        public final Integer terminalID;
+        public final String date;
+        public final Integer valid;
+
+        public validReceivedTransaction(Integer amount, Integer cardID, Integer terminalID, String date, Integer valid) {
+            this.amount = amount;
+            this.cardID = cardID;
+            this.terminalID = terminalID;
+            this.date = date;
+            this.valid = valid;
+        }
+    }
+
+    /**
      * balanceList keeps cards balance list.
      */
     private final HashMap<Integer, CardBalanceListElement> balanceList = new HashMap<Integer, CardBalanceListElement>();
@@ -159,6 +178,46 @@ public class TransactionList extends AbstractActor {
         }
     }
 
+    private void validCheckAndUpdateBalanceStatus(validReceivedTransaction received, CardBalanceListElement cardValues){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(datePattern);
+        LocalDate transactionReceivedDate = LocalDate.parse( received.date, formatter);
+        LocalDate lastTransactionDate = LocalDate.parse( cardValues.lastUpdate, formatter);
+
+        if (cardValues.cardType == Kind.cardKind.Debit) {
+            /**
+             * For debit card, if current date is different than last transaction date, daily limit updated
+             * TODO date of the balance update should be recorded.
+             *      When card has not enough balance even after update, it will update again in the next transaction.
+             *      No error, but extra work.
+             *      Extra variable can be added which shows last update is balance update or transaction update.
+             */
+            if (transactionReceivedDate.getDayOfMonth() != lastTransactionDate.getDayOfMonth()) {
+                //if (compareDates(transactionReceivedDate, lastTransactionDate)) {
+                cardValues.balance = cardValues.limit;
+                balanceList.put(cardValues.cardID,cardValues);
+                System.out.println("Debit card daily balance update! Card ID : " + cardValues.cardID + " Card Limit: "
+                        + cardValues.limit);
+            }
+        }else{
+            /**
+             * For credit card, if statement date is recent than current date, continue without update
+             */
+            LocalDate statementDateForThisMonth = LocalDate.of(transactionReceivedDate.getYear(),
+                    transactionReceivedDate.getMonth(),cardValues.statementDate);
+            if (!compareDates(statementDateForThisMonth, transactionReceivedDate)) {
+                /**
+                 * If last transaction date is recent than statement date, do not update
+                 */
+                if (!compareDates(lastTransactionDate,statementDateForThisMonth)) {
+                    cardValues.balance = cardValues.limit;
+                    balanceList.put(cardValues.cardID,cardValues);
+                    System.out.println("Monthly balance update Card ID : " + cardValues.cardID + " Card Limit: "
+                            + cardValues.limit);
+                }
+            }
+        }
+    }
+
     // TODO balance list can be printed to a file before exiting simulation
 
     // constructor
@@ -212,7 +271,47 @@ public class TransactionList extends AbstractActor {
                     }
                     // add received transaction to the list
                     TransactionListElement transactionValues = new TransactionListElement(cardValues.cardID,
-                            received.terminalID,received.amount,balance,newBalance,validity,received.date);
+                            received.terminalID,received.amount,balance,newBalance,validity,0,received.date);
+                    transactionList.add(transactionValues);
+
+                    writerTransactions.tell(new transactionAddLine(transactionValues,cardValues,terminalList.get(received.terminalID)),getSelf());
+
+                })
+                .match(validReceivedTransaction.class, received -> {
+                    CardBalanceListElement cardValues = balanceList.get(received.cardID);
+
+                    /**
+                     * check for statement date / balance update
+                     */
+                    validCheckAndUpdateBalanceStatus(received,cardValues);
+
+                    int balance = cardValues.balance;
+                    int validity = 1;
+                    int newBalance = balance;
+                    if (balance >= received.amount) {
+                        // valid
+                        newBalance = balance - received.amount;
+                        // log.info("\n#Valid Transaction Received: Terminal " + received.terminalID + " - Amount : "
+                        // + received.amount + " - Previous Balance : " + balance + " - Remaining : " + newBalance
+                        // + " - CardID : " + received.cardID);
+                        System.out.println("#Valid Transaction Received: Terminal " + received.terminalID
+                                + " - Amount : " + received.amount + " - Previous Balance : " + balance
+                                + " - Remaining : " + newBalance + " - CardID : " + cardValues.cardID);
+                        cardValues.balance = newBalance;
+                        cardValues.lastUpdate = received.date;
+                        balanceList.put(cardValues.cardID,cardValues);
+                    } else {
+                        // not valid
+                        validity = 0;
+                        //log.info("\n#Non-Valid Transaction Received: Terminal " + received.terminalID + " - Amount : "
+                        // + received.amount + " - Balance : " + balance + " - CardID : " + received.cardID);
+                        System.out.println("#Non-Valid Transaction Received: Terminal " + received.terminalID
+                                + " - Amount : " + received.amount + " - Balance : " + balance + " - CardID : "
+                                + cardValues.cardID);
+                    }
+                    // add received transaction to the list
+                    TransactionListElement transactionValues = new TransactionListElement(cardValues.cardID,
+                            received.terminalID,received.amount,balance,newBalance,validity,received.valid,received.date);
                     transactionList.add(transactionValues);
 
                     writerTransactions.tell(new transactionAddLine(transactionValues,cardValues,terminalList.get(received.terminalID)),getSelf());

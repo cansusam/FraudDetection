@@ -49,7 +49,8 @@ public class Writer extends AbstractActor {
                     + "," + cardInfo.homeLocationToString()
                     + "," + terminalInfo.terminalType.toString()
                     + "," + terminalInfo.terminalLocation()
-                    + "," + terminalInfo.merchantName();
+                    + "," + terminalInfo.merchantName()
+                    + "," + lineInfo.fraud;
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.append("\n"+line);
@@ -68,7 +69,7 @@ public class Writer extends AbstractActor {
                 folder.mkdir();
             // CSV file headlines
             String headlines = "CardID,TerminalID,Amount,Balance,Remaining,Validity,Date,CardType,CardLimit," +
-                    "CardLocation,TerminalType,TerminalLocation,MerchantName";
+                    "CardLocation,TerminalType,TerminalLocation,MerchantName,NoFraud";
             // File name with date/time
             DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
             df.setTimeZone(TimeZone.getTimeZone("GMT+3"));

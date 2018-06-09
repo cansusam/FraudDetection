@@ -142,9 +142,11 @@ public class TransactionSimulator {
      *
      */
     public static void rangeGeneration() {
-        validRangeCreate(validRanges.amountLowerLimits,validRanges.amountUpperLimits);
-        validRangeCreate(validRanges.schedulingLowerLimits,validRanges.schedulingUpperLimits);
-        validRangeCreate(validRanges.terminalLowerLimits,validRanges.terminalUpperLimits);
+        for(int i=0;i<terminalNumber;i++)
+            terminalArray[i] = i;
+        validRangeCreate(amountList,validRanges.amountLowerLimits,validRanges.amountUpperLimits);
+        validRangeCreate(schedulingDurationsMS,validRanges.schedulingLowerLimits,validRanges.schedulingUpperLimits);
+        validRangeCreate(terminalArray,validRanges.terminalLowerLimits,validRanges.terminalUpperLimits);
     }
 
     /**
@@ -153,15 +155,15 @@ public class TransactionSimulator {
      * @param featureLowerLimits
      * @param featureUpperLimits
      */
-    public static void validRangeCreate(Integer[] featureLowerLimits,Integer[] featureUpperLimits){
+    public static void validRangeCreate(int[] array, Integer[] featureLowerLimits,Integer[] featureUpperLimits){
         Random rn = new Random();
-        int length = featureLowerLimits.length;
+        int length = array.length;
         int windowSize = (int)Math.floor(length*windowRatio);
         int randNumber;
-        for (int i = 0; i <length ; i++) {
+        for (int i = 0; i <cardNumber ; i++) {
             randNumber =  rn.nextInt(length-windowSize);
-            featureLowerLimits[i] = randNumber;
-            featureUpperLimits[i] = randNumber+windowSize;
+            featureLowerLimits[i] = array[randNumber];
+            featureUpperLimits[i] = array[randNumber+windowSize];
         }
     }
 
@@ -169,10 +171,8 @@ public class TransactionSimulator {
      * For each user, different feature distributions are generated.
      */
     public static void recordFeatureDistributions() {
-        for(int i=0;i<terminalNumber;i++)
-            terminalArray[i] = i;
         for (int j = 0; j < cardNumber; j++) {
-            List<IntegerDistribution> featureDistributions = new ArrayList<>();
+            List<IntegerDistribution> featureDistributions = new ArrayList<IntegerDistribution>();
             featureDistributions.add(generateDistributions(amountList));
             featureDistributions.add(generateDistributions(schedulingDurationsMS));
             featureDistributions.add(generateDistributions(terminalArray));
@@ -193,7 +193,7 @@ public class TransactionSimulator {
         for (int i = 0; i < feature.length; i++) {
             probs[i] = (double) rn.nextInt(feature.length);
         }
-        dist = new EnumeratedIntegerDistribution(amountList,probs);
+        dist = new EnumeratedIntegerDistribution(feature,probs);
 
         System.out.print("");
         return dist;
@@ -215,11 +215,32 @@ public class TransactionSimulator {
         int randomDuration = cardFeatureDistributions.get(randomCard).get(1).sample();
         int randomTerminal = cardFeatureDistributions.get(randomCard).get(2).sample();
 
+        int valid;
+        valid = isTransactionValid(randomCard,randomAmount,randomDuration,randomTerminal);
+
         system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
-                () -> cardList.get(randomCard).tell(new CardActor.Transaction(randomAmount,
-                        terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
+                () -> cardList.get(randomCard).tell(new CardActor.ValidTransaction(randomAmount,
+                        terminalList.get(randomTerminal),transactions,valid),ActorRef.noSender()), system.dispatcher());
     }
 
+    /**
+     * Check if the transaction is valid (in the range of predetermined distribution)
+     * @param amount
+     * @param duration
+     * @param terminal
+     * @return
+     */
+    public static int isTransactionValid(int cardId, int amount, int duration,int terminal) {
+        if(validRanges.amountLowerLimits[cardId] <= amount
+                && validRanges.amountUpperLimits[cardId] >= amount
+                && validRanges.schedulingLowerLimits[cardId] <= duration
+                && validRanges.schedulingUpperLimits[cardId] >= duration
+                && validRanges.terminalLowerLimits[cardId] <= terminal
+                && validRanges.terminalUpperLimits[cardId] >= terminal)
+            return 1;
+        return 0;
+
+    }
 
     /**
      *
@@ -282,13 +303,13 @@ public class TransactionSimulator {
     public static void endlessSimulation(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                          ActorRef transactions) throws IOException{
         do {
-            if(!gaussDistroON)
-                schedulingTransactions(system,cardList,terminalList,transactions);
-            else if(multiVariateON){
+            if(multiVariateON){
                 rangeGeneration();
                 recordFeatureDistributions();
                 discreteSchedulingTransactions(system,cardList,terminalList,transactions);
             }
+            else if(!gaussDistroON)
+                schedulingTransactions(system,cardList,terminalList,transactions);
             else
                 gaussSchedulingTransactions(system,cardList,terminalList,transactions);
         }while (System.in.available() == 0);
@@ -304,13 +325,13 @@ public class TransactionSimulator {
     public static void limitedTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                            ActorRef transactions){
         for (int i=0; i<numberOfTransactions; i++) {
-            if(!gaussDistroON)
-                schedulingTransactions(system,cardList,terminalList,transactions);
-            else if(multiVariateON){
+            if(multiVariateON){
                 rangeGeneration();
                 recordFeatureDistributions();
                 discreteSchedulingTransactions(system,cardList,terminalList,transactions);
             }
+            else if(!gaussDistroON)
+                schedulingTransactions(system,cardList,terminalList,transactions);
             else
                 gaussSchedulingTransactions(system,cardList,terminalList,transactions);
         }

@@ -9,7 +9,7 @@ public class Constants {
     // Simulation
     public static final int atmLimit = 81; // total ATM number 80 Local + 1 International
     public static final int merchantLimit = 5;
-    public static final int terminalNumber = 1;
+    public static final int terminalNumber = 10;
     public static final int cardNumber = terminalNumber*10;
     public static final int amountList[] = {100,500,1000,2000,3000,4000,5000,7000,10000,12000};
 
@@ -55,7 +55,7 @@ public class Constants {
     public static final boolean gaussDistroON = false;
     public static final boolean multiVariateON = true;
     public static final int distributedFeatureNumber = 3;
-    public static final double windowRatio = 0.4;
+    public static final double windowRatio = 0.7;
 
 
 

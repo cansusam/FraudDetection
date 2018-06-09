@@ -19,16 +19,18 @@ public class TransactionListElement {
     public Integer balance;
     public Integer remaining;
     public Integer validity;
+    public Integer fraud;
     public String date;
 
     public TransactionListElement(Integer cardID, Integer terminalID, Integer amount, Integer balance,
-                                  Integer remaining, Integer validity, String  date){
+                                  Integer remaining, Integer validity,Integer fraud, String  date){
         this.cardID = cardID;
         this.terminalID = terminalID;
         this.amount = amount;
         this.balance = balance;
         this.remaining = remaining;
         this.validity = validity;
+        this.fraud = fraud;
         this.date = date;
     }
 }
