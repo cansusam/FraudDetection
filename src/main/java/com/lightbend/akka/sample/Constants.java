@@ -6,12 +6,16 @@ package com.lightbend.akka.sample;
  */
 public class Constants {
 
-    //
+    // Simulation
     public static final int atmLimit = 81; // total ATM number 80 Local + 1 International
     public static final int merchantLimit = 5;
-    public static final int terminalNumber = 200;
-    public static final int cardNumber = 100;
-    public static final int amountList[] = {100,1000,10000};
+    public static final int terminalNumber = 1;
+    public static final int cardNumber = terminalNumber*100000;
+    public static final int amountList[] = {100,1000,5000};
+
+    // Simulation mode constants
+    public static boolean endlessSimulationON = false;
+    public static final int numberOfTransactions = 100000;
 
     // Time and Scheduling
     public static final int schedulingDurationsMS[] = {1,10,100,1000,10000};
@@ -45,7 +49,10 @@ public class Constants {
      */
     public static final int maxValueOfStatementDay = 28;
 
-    // Simulation mode constants
-    public static boolean endlessSimulationON = false;
-    public static final int numberOfTransactions = 100;
+    /**
+     * Gaussian means and variances, each user should have different guassians (or mixtures) for different features
+     */
+    public static final boolean gaussDistroON = false;
+
+
 }

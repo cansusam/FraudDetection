@@ -110,17 +110,69 @@ public class TransactionSimulator {
     public static void schedulingTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                               ActorRef transactions){
         Random rn = new Random();
-        int randomCard = rn.nextInt(cardNumber);
-        int randomAmount = rn.nextInt(amountList.length);
-        int randomTerminal = rn.nextInt(terminalNumber);
+        int randomCard = rn.nextInt(cardNumber); // cards selected uniformly
         int randomDuration;
+        int randomAmount = amountList[rn.nextInt(amountList.length)];
+        int randomTerminal = rn.nextInt(terminalNumber);
         if (schedulingWithRandomIntervalON)
             randomDuration = rn.nextInt(schedulingDurationsInterval);
         else
             randomDuration = schedulingDurationsMS[rn.nextInt(schedulingDurationsMS.length)];
+
         system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
-                () -> cardList.get(randomCard).tell(new CardActor.Transaction(amountList[randomAmount],
+                () -> cardList.get(randomCard).tell(new CardActor.Transaction(randomAmount,
                         terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
+    }
+
+
+    /**
+     *
+     * @param system
+     * @param cardList
+     * @param terminalList
+     * @param transactions
+     */
+    public static void gaussSchedulingTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
+                                              ActorRef transactions){
+        Random rn = new Random();
+        int randomCard = rn.nextInt(cardNumber); // cards selected uniformly
+        int randomDuration;
+
+        int randomAmount = amountList[rn.nextInt(amountList.length)];
+//        int amountMax = amountList[amountList.length-1];
+//        int randomAmount = generateGaussValue(amountMax,10,randomCard,1);
+
+        int randomTerminal = generateGaussValue(terminalNumber,0,randomCard,1);
+
+        int durationMax = schedulingDurationsMS[schedulingDurationsMS.length-1];
+        int durationMin = schedulingDurationsMS[0];
+        randomDuration = generateGaussValue(durationMax,durationMin,randomCard,1);
+
+        system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
+                () -> cardList.get(randomCard).tell(new CardActor.Transaction(randomAmount,
+                        terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
+    }
+
+    /**
+     * Normally distributed numbers returned according to given parameters for features.
+     * @param upperLimit
+     * @param lowerLimit
+     * @param user
+     * @param feature
+     * @return
+     */
+    static private int generateGaussValue(int upperLimit, int lowerLimit, int user, int feature){
+        Random rn = new Random();
+        double gvalue;
+        int result;
+        int mean = (upperLimit+lowerLimit)/2;
+        int std = (user+feature)%(mean/2); // for user and feature specific variations
+        do {
+            gvalue = rn.nextGaussian()*std + mean;
+            result = (int) Math.round(gvalue);
+        } while (result < lowerLimit || result > upperLimit);
+
+        return result;
     }
 
     /**
@@ -134,7 +186,10 @@ public class TransactionSimulator {
     public static void endlessSimulation(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                          ActorRef transactions) throws IOException{
         do {
-            schedulingTransactions(system,cardList,terminalList,transactions);
+            if(!gaussDistroON)
+                schedulingTransactions(system,cardList,terminalList,transactions);
+            else
+                gaussSchedulingTransactions(system,cardList,terminalList,transactions);
         }while (System.in.available() == 0);
     }
 
@@ -148,7 +203,10 @@ public class TransactionSimulator {
     public static void limitedTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                            ActorRef transactions){
         for (int i=0; i<numberOfTransactions; i++) {
-            schedulingTransactions(system,cardList,terminalList,transactions);
+            if(!gaussDistroON)
+                schedulingTransactions(system,cardList,terminalList,transactions);
+            else
+                gaussSchedulingTransactions(system,cardList,terminalList,transactions);
         }
     }
 
