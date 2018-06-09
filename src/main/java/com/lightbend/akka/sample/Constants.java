@@ -10,15 +10,15 @@ public class Constants {
     public static final int atmLimit = 81; // total ATM number 80 Local + 1 International
     public static final int merchantLimit = 5;
     public static final int terminalNumber = 1;
-    public static final int cardNumber = terminalNumber*100000;
-    public static final int amountList[] = {100,1000,5000};
+    public static final int cardNumber = terminalNumber*10;
+    public static final int amountList[] = {100,500,1000,2000,3000,4000,5000,7000,10000,12000};
 
     // Simulation mode constants
     public static boolean endlessSimulationON = false;
-    public static final int numberOfTransactions = 100000;
+    public static final int numberOfTransactions = 100;
 
     // Time and Scheduling
-    public static final int schedulingDurationsMS[] = {1,10,100,1000,10000};
+    public static final int schedulingDurationsMS[] = {10,100,500,1000,2000,3000,4000,7000,8000,10000};
     /**
      * [0,X] milliseconds used for scheduling of card requests
      */
@@ -50,9 +50,13 @@ public class Constants {
     public static final int maxValueOfStatementDay = 28;
 
     /**
-     * Gaussian means and variances, each user should have different guassians (or mixtures) for different features
+     * Gaussian distributed values for scheduling and terminal selection
      */
     public static final boolean gaussDistroON = false;
+    public static final boolean multiVariateON = true;
+    public static final int distributedFeatureNumber = 3;
+    public static final double windowRatio = 0.4;
+
 
 
 }

@@ -6,8 +6,12 @@ import akka.actor.ActorSystem;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
+import org.apache.commons.math3.distribution.EnumeratedIntegerDistribution;
+import org.apache.commons.math3.distribution.IntegerDistribution;
 
 import static com.lightbend.akka.sample.Constants.*;
 
@@ -124,6 +128,98 @@ public class TransactionSimulator {
                         terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
     }
 
+    /**
+     * List elements
+     * 1-amountList
+     * 2-schedulingList
+     * 3-terminalArray
+     */
+    private static HashMap<Integer, List<IntegerDistribution>> cardFeatureDistributions = new HashMap<>();
+    private static ValidDistributionRanges validRanges = new ValidDistributionRanges();
+    private static int terminalArray[] = new int[terminalNumber];
+
+    /**
+     *
+     */
+    public static void rangeGeneration() {
+        validRangeCreate(validRanges.amountLowerLimits,validRanges.amountUpperLimits);
+        validRangeCreate(validRanges.schedulingLowerLimits,validRanges.schedulingUpperLimits);
+        validRangeCreate(validRanges.terminalLowerLimits,validRanges.terminalUpperLimits);
+    }
+
+    /**
+     * For separable(valid/nonValid) data generation, ranges for each feature are created.
+     *
+     * @param featureLowerLimits
+     * @param featureUpperLimits
+     */
+    public static void validRangeCreate(Integer[] featureLowerLimits,Integer[] featureUpperLimits){
+        Random rn = new Random();
+        int length = featureLowerLimits.length;
+        int windowSize = (int)Math.floor(length*windowRatio);
+        int randNumber;
+        for (int i = 0; i <length ; i++) {
+            randNumber =  rn.nextInt(length-windowSize);
+            featureLowerLimits[i] = randNumber;
+            featureUpperLimits[i] = randNumber+windowSize;
+        }
+    }
+
+    /**
+     * For each user, different feature distributions are generated.
+     */
+    public static void recordFeatureDistributions() {
+        for(int i=0;i<terminalNumber;i++)
+            terminalArray[i] = i;
+        for (int j = 0; j < cardNumber; j++) {
+            List<IntegerDistribution> featureDistributions = new ArrayList<>();
+            featureDistributions.add(generateDistributions(amountList));
+            featureDistributions.add(generateDistributions(schedulingDurationsMS));
+            featureDistributions.add(generateDistributions(terminalArray));
+            cardFeatureDistributions.put(j,featureDistributions);
+        }
+    }
+
+    /**
+     * Feature are distributed according to generated distributions
+     * @param feature
+     * @return
+     */
+    public static IntegerDistribution generateDistributions(int[] feature){
+        Random rn = new Random();
+        double probs[] = new double[feature.length];
+        IntegerDistribution dist;
+        //IntStream a = new Random().ints(amountList.length, 0, amountList.length)
+        for (int i = 0; i < feature.length; i++) {
+            probs[i] = (double) rn.nextInt(feature.length);
+        }
+        dist = new EnumeratedIntegerDistribution(amountList,probs);
+
+        System.out.print("");
+        return dist;
+    }
+
+    /**
+     * Discrete probability distribution used for amount, scheduletime and terminal
+     * @param system
+     * @param cardList
+     * @param terminalList
+     * @param transactions
+     */
+    public static void discreteSchedulingTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
+                                              ActorRef transactions){
+        Random rn = new Random();
+        int randomCard = rn.nextInt(cardNumber); // cards selected uniformly
+
+        int randomAmount = cardFeatureDistributions.get(randomCard).get(0).sample();
+        int randomDuration = cardFeatureDistributions.get(randomCard).get(1).sample();
+        int randomTerminal = cardFeatureDistributions.get(randomCard).get(2).sample();
+
+        system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
+                () -> cardList.get(randomCard).tell(new CardActor.Transaction(randomAmount,
+                        terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
+    }
+
 
     /**
      *
@@ -188,6 +284,11 @@ public class TransactionSimulator {
         do {
             if(!gaussDistroON)
                 schedulingTransactions(system,cardList,terminalList,transactions);
+            else if(multiVariateON){
+                rangeGeneration();
+                recordFeatureDistributions();
+                discreteSchedulingTransactions(system,cardList,terminalList,transactions);
+            }
             else
                 gaussSchedulingTransactions(system,cardList,terminalList,transactions);
         }while (System.in.available() == 0);
@@ -205,6 +306,11 @@ public class TransactionSimulator {
         for (int i=0; i<numberOfTransactions; i++) {
             if(!gaussDistroON)
                 schedulingTransactions(system,cardList,terminalList,transactions);
+            else if(multiVariateON){
+                rangeGeneration();
+                recordFeatureDistributions();
+                discreteSchedulingTransactions(system,cardList,terminalList,transactions);
+            }
             else
                 gaussSchedulingTransactions(system,cardList,terminalList,transactions);
         }
