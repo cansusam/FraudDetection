@@ -12,14 +12,15 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
-// TODO This class will be responsible of writing transactions to the .csv
 
-//#writerTransactions-messages
+/**
+ * Write is responsible for writing output file in csv format.
+ * TransactionList class creates this actor, and sends messages to be written in csv file.
+ */
 public class Writer extends AbstractActor {
-    //#writerTransactions-messages
+
     static public Props props() {
         return Props.create(Writer.class, () -> new Writer());
     }

@@ -16,6 +16,14 @@ import java.util.List;
 
 import static com.lightbend.akka.sample.Constants.*;
 
+/**
+ * TransactionList actor works as accountant.
+ *  Cards' net values are stored in balancedList.
+ *  Terminals with their information stored in terminalList.
+ *  All transactions are recorded into transactionList (like a ledger).
+ *
+ *  Cards and Terminals are recorded after their initialization to balancedList and terminallist respectively.
+ */
 public class TransactionList extends AbstractActor {
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
@@ -54,7 +62,8 @@ public class TransactionList extends AbstractActor {
     private final List<TransactionListElement> transactionList = new ArrayList<>();
 
     /**
-     * Last state of cards are kept in the list.
+     * Last state of cards are kept in this list.
+     * Right after their initialization, cards added to this list.
      */
     static public class receivedCardInitialization {
         public final Integer limit;
@@ -76,9 +85,11 @@ public class TransactionList extends AbstractActor {
         }
     }
 
+    /**
+     * Terminals stored in the list right after their initialization.
+     */
     static public class receivedTerminalInitialization {
         public final TerminalListElement terminalInfo;
-
         public receivedTerminalInitialization(TerminalListElement terminalInfo) {
             this.terminalInfo = terminalInfo;
          }

@@ -11,8 +11,17 @@ import java.util.Random;
 
 import static com.lightbend.akka.sample.Constants.*;
 
+/**
+ * Main file for simulation.
+ * Actor system and its three main actor types (transactions actor, terminal actors and card actors)
+ * are created in this file.
+ */
 public class TransactionSimulator {
 
+    /**
+     * System time recorded to be used for time acceleration calculations.
+     * @param args
+     */
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("transactions");
         try {
@@ -97,7 +106,6 @@ public class TransactionSimulator {
      * @param cardList
      * @param terminalList
      * @param transactions
-     * @throws IOException
      */
     public static void schedulingTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                               ActorRef transactions){

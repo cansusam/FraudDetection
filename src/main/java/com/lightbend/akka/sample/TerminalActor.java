@@ -11,6 +11,10 @@ import java.util.Random;
 
 import static com.lightbend.akka.sample.Constants.*;
 
+
+/**
+ * Terminal actor gets cards request and directs it with its own information to the transactionlist actor.
+ */
 public class TerminalActor extends AbstractActor {
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 

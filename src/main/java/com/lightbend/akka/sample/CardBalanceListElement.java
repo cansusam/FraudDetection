@@ -2,17 +2,18 @@ package com.lightbend.akka.sample;
 
 import static com.lightbend.akka.sample.Constants.atmLimit;
 
+/**
+ * Balance list used to check last situation of each card.
+ * Balance list details
+ * 1- CardID
+ * 2- Limit
+ * 3- Initialization Date
+ * 4- Balance (Equal to limit at initialization).
+ * 5- LastUpdate Date
+ * 6- Card Type
+ */
 public class CardBalanceListElement {
-    /**
-     * Balance list used to check last situation of each card.
-     * Balance list details
-     * 1- CardID
-     * 2- Limit
-     * 3- Initialization Date
-     * 4- Balance (Equal to limit at initialization).
-     * 5- LastUpdate Date
-     * 6- Card Type
-     */
+
 
     public Integer cardID;
     public Integer limit;

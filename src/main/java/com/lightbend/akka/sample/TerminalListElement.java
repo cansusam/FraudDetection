@@ -2,13 +2,14 @@ package com.lightbend.akka.sample;
 
 import static com.lightbend.akka.sample.Constants.*;
 
+/**
+ * Terminal list used only for data record.
+ * 1- terminalID
+ * 2- terminalType
+ * 3- merchantCategory
+ */
 public class TerminalListElement {
-    /**
-     * Terminal list used only for data record.
-     * 1- terminalID
-     * 2- terminalType
-     * 3- merchantCategory
-     */
+
 
     public Integer terminalID;
     public Kind.terminalKind terminalType;
@@ -20,6 +21,10 @@ public class TerminalListElement {
         this.merchantCategory = merchantCategory;
     }
 
+    /**
+     * Converts location to string.
+     * @return
+     */
     public String terminalLocation(){
         if(terminalID == atmLimit-1)
             return "International";
@@ -28,6 +33,10 @@ public class TerminalListElement {
         return terminalID.toString();
     }
 
+    /**
+     * Converts merchantCategory to string.
+     * @return
+     */
     public String merchantName(){
         switch (merchantCategory){
             case 0: return "A";

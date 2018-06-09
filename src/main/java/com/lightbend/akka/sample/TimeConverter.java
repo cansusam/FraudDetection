@@ -5,11 +5,10 @@ import java.util.Date;
 
 import static com.lightbend.akka.sample.Constants.*;
 
+/**
+ * Simulation time is accelerated by multiplying current time with "timeaccelerator" constant.
+ */
 public class TimeConverter {
-
-    /**
-     * Simulation time is accelerated by multiplying current time with "timeaccelerator" constant.
-     */
 
     public static long startTime;
     private static int timeAccelerator = Constants.timeAccelerator;
