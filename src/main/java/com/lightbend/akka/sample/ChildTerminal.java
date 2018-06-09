@@ -62,7 +62,7 @@ public class ChildTerminal extends AbstractActor {
                     //log.info("#Received: Terminal " + id + " - Amount : " + received.amount.toString() + " - CardID : " + received.cardID.toString());
                     String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
                     // Direct to the TransactionList // possible to do it directly from card
-                    received.transactionList.tell(new receivedTransaction(received.amount,received.cardID,id,timeStamp), getSelf());
+//                    received.transactionList.tell(new receivedTransaction(received.amount,received.cardID,id,timeStamp), getSelf());
 
 
                 }) // when request received, this message triggered

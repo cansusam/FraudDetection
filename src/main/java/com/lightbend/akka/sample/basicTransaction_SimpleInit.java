@@ -28,28 +28,10 @@ public class basicTransaction_SimpleInit {
             generateTerminals(terminalList,system);
             generateCards(cardList,transactions,system);
 
-            TimeConverter.timeToDate(System.currentTimeMillis());
-            //#main-send-messages
-//            do {
-            for (int i=0; i<numberOfTransactions; i++) {
-                Random rn = new Random();
-                int randomCard = rn.nextInt(cardNumber);
-                int randomAmount = rn.nextInt(amountList.length);
-                int randomTerminal = rn.nextInt(terminalNumber);
-                int randomDuration = rn.nextInt(schedulingDurationsMS.length);
-                system.scheduler().scheduleOnce(Duration.ofMillis(schedulingDurationsMS[randomDuration]),
-//                int randomDuration = rn.nextInt(schedulingDurationsInterval);
-//                system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                cardList.get(randomCard).tell(new Card_SimpleInit.Transaction(amountList[randomAmount],terminalList.get(randomTerminal),transactions),ActorRef.noSender());
-                            }
-                        }, system.dispatcher());
-                //
-            }
-//            }while (System.in.available() == 0);
-            //#main-send-messages
+            if(endlessSimulationON)
+                endlessSimulation(system,cardList,terminalList,transactions);
+            else
+                limitedTransactions(system,cardList,terminalList,transactions);
 
             System.out.println(">>> Press ENTER to exit <<<");
             System.in.read();
@@ -101,6 +83,63 @@ public class basicTransaction_SimpleInit {
         for (int i = 0; i < cardNumber; i++) {
             cardList.add(system.actorOf(Card_SimpleInit.props()));
             cardList.get(i).tell(new Card_SimpleInit.recordToList(transactions),ActorRef.noSender());
+        }
+    }
+
+    /**
+     * Scheduling a transaction for a randomly selected card and terminal with random amount selected from predefined
+     * array.
+     * Scheduling duration can be selected either from predefined array or randomly with setting
+     * "schedulingWithRandomIntervalON" constant on/off.
+     *
+     * @param system
+     * @param cardList
+     * @param terminalList
+     * @param transactions
+     * @throws IOException
+     */
+    public static void schedulingTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
+                                              ActorRef transactions){
+        Random rn = new Random();
+        int randomCard = rn.nextInt(cardNumber);
+        int randomAmount = rn.nextInt(amountList.length);
+        int randomTerminal = rn.nextInt(terminalNumber);
+        int randomDuration;
+        if (schedulingWithRandomIntervalON)
+            randomDuration = rn.nextInt(schedulingDurationsInterval);
+        else
+            randomDuration = schedulingDurationsMS[rn.nextInt(schedulingDurationsMS.length)];
+        system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
+                () -> cardList.get(randomCard).tell(new Card_SimpleInit.Transaction(amountList[randomAmount],
+                        terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
+    }
+
+    /**
+     * Simulation continues until key press.
+     * @param system
+     * @param cardList
+     * @param terminalList
+     * @param transactions
+     * @throws IOException
+     */
+    public static void endlessSimulation(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
+                                         ActorRef transactions) throws IOException{
+        do {
+            schedulingTransactions(system,cardList,terminalList,transactions);
+        }while (System.in.available() == 0);
+    }
+
+    /**
+     * Simulation with limited number of transactions
+     * @param system
+     * @param cardList
+     * @param terminalList
+     * @param transactions
+     */
+    public static void limitedTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
+                                           ActorRef transactions){
+        for (int i=0; i<numberOfTransactions; i++) {
+            schedulingTransactions(system,cardList,terminalList,transactions);
         }
     }
 

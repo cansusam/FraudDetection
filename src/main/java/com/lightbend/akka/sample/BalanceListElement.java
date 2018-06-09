@@ -6,20 +6,23 @@ public class BalanceListElement {
      * Balance list details
      * 1- CardID
      * 2- Limit
-     * 3- Date in Integer format
+     * 3- Initialization Date
      * 4- Balance (Equal to limit at initialization).
+     * 5- LastUpdate Date
      */
 
     public Integer cardID;
     public Integer limit;
-    public String date;
+    public String initDate;
     public Integer balance;
+    public String lastUpdate;
 
-    BalanceListElement(Integer cardID, Integer limit, String date, Integer balance){
+    BalanceListElement(Integer cardID, Integer limit, String initDate, Integer balance){
         this.cardID = cardID;
         this.limit = limit;
-        this.date = date;
+        this.initDate = initDate;
         this.balance = balance;
+        this.lastUpdate = initDate;
     }
 
 }

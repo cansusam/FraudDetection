@@ -8,8 +8,9 @@ import com.lightbend.akka.sample.TransactionList.receivedCardInitialization;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.Random;
+
+import static com.lightbend.akka.sample.Constants.*;
 
 //#Cart-messages
 public class Card_SimpleInit extends AbstractActor {
@@ -52,12 +53,11 @@ public class Card_SimpleInit extends AbstractActor {
     }
 
     private static Integer idCounter = 0;
-    private final Integer id;
-    private final Integer limit;
-    private final Kind.cardKind type;
-    private final Integer homeLocation;
-    private Integer[] limitPool = {5000,10000,20000,30000};
-    private Integer[] limitRatios = {4,3,2,1};
+    public final Integer id;
+    public final Integer limit;
+    public final Kind.cardKind type;
+    public final Integer homeLocation;
+    public final Integer statementDate; // day of the month (for credit cards)
 
     public Card_SimpleInit() {
         this.id = idCounter; // each Card will have unique ID
@@ -69,13 +69,16 @@ public class Card_SimpleInit extends AbstractActor {
         }else
             this.type = Kind.cardKind.Credit;
 
-        if(type == Kind.cardKind.Debit)
-            this.limit = 1000; // Daily limit
-        else
-            this.limit = limitPool[limitSelection()]; // Monthly limit
-
         Random rn = new Random();
-        this.homeLocation = rn.nextInt(82); // 81 for International
+        if (type == Kind.cardKind.Debit) {
+            this.limit = debitLimit; // Daily limit
+            this.statementDate = 1; // not important
+        }
+        else{
+            this.limit = cardLimitPool[limitSelection()]; // Monthly limit
+            this.statementDate = rn.nextInt(maxValueOfStatementDay) + 1;
+        }
+        this.homeLocation = rn.nextInt(atmLimit + 1); // 81 for International
     }
 
     /**
@@ -88,7 +91,7 @@ public class Card_SimpleInit extends AbstractActor {
         Double[] limitProbs = calculateLimitProbs();
         //Calculate
         rand = rn.nextFloat();
-        for (int i = 0; i < limitPool.length; i++) {
+        for (int i = 0; i < cardLimitPool.length; i++) {
             if (rand < limitProbs[i]) {
                 limitIndex = i;
                 break;
@@ -104,8 +107,7 @@ public class Card_SimpleInit extends AbstractActor {
     private Double[] calculateLimitProbs(){
         Double[] probArray = new Double[limitRatios.length];
         Double totalProb = 0.0;
-
-        Double ratiosTotal = 0.0; //
+        Double ratiosTotal = 0.0;
         for (int i = 0; i < limitRatios.length; i++) {
             ratiosTotal += limitRatios[i];
         }
@@ -113,7 +115,6 @@ public class Card_SimpleInit extends AbstractActor {
             probArray[i] = totalProb + limitRatios[i]/ratiosTotal;
             totalProb = probArray[i];
         }
-
         return probArray;
     }
 
@@ -122,10 +123,9 @@ public class Card_SimpleInit extends AbstractActor {
         return receiveBuilder()
                 .match(Transaction.class, x -> {
                     // Send message of transaction to the related terminal
-                    x.terminalActor.tell(new receivedAmount(x.amount,id,x.transactionListActor), getSelf());
+                    x.terminalActor.tell(new receivedAmount(x.amount,this,x.transactionListActor), getSelf());
                 })
                 .match(recordToList.class, list ->{
-                    //String timeStamp = new SimpleDateFormat("HHmmss").format(new java.util.Date());
                     String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());
                     list.transactionList.tell(new receivedCardInitialization(limit,id,timeStamp),getSelf());
                 })
