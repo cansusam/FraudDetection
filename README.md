@@ -47,6 +47,7 @@ Implement the features and a simple prediction model.
 * Single terminal, single card
 * Single terminal, multiple cards (100000)
 * Multiple terminal (1000), multiple cards (100000)
+* Artificial Training Dataset Generation (Uniform/Gaussian/DiscreteMix)
 
 [WAITING]
 * Scheduled initialization of cards/terminals.
