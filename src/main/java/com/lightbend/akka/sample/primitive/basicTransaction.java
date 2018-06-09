@@ -15,7 +15,7 @@ public class basicTransaction {
             final ActorRef cardActor = system.actorOf(Card.props(100,terminalActor));
             final ActorRef cardActor1 = system.actorOf(Card.props(200,terminalActor));
             final ActorRef cardActor2 = system.actorOf(Card.props(300,terminalActor));
-            final ActorRef cardActor3 = system.actorOf(Card_SimpleInit.props());
+//            final ActorRef cardActor3 = system.actorOf(Card_SimpleInit.props(1));
             //#create-actors
 
             //#main-send-messages

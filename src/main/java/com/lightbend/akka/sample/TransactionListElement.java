@@ -21,6 +21,10 @@ public class TransactionListElement {
     public Integer validity;
     public String date;
 
+//    public Integer merchantCategory;
+//    public String cardType;
+//    public String terminalType;
+
 
     public TransactionListElement(Integer cardID,
                                   Integer terminalID,
@@ -28,7 +32,12 @@ public class TransactionListElement {
                                   Integer balance,
                                   Integer remaining,
                                   Integer validity,
-                                  String  date){
+                                  String  date
+//            ,
+//                                  Integer merchantCategory,
+//                                  Kind.cardKind cardType,
+//                                  Kind.terminalKind terminalType
+    ){
         this.cardID = cardID;
         this.terminalID = terminalID;
         this.amount = amount;
@@ -36,5 +45,9 @@ public class TransactionListElement {
         this.remaining = remaining;
         this.validity = validity;
         this.date = date;
+//
+//        this.merchantCategory = merchantCategory;
+//        this.cardType = cardType.toString();
+//        this.terminalType = terminalType.toString();
     }
 }

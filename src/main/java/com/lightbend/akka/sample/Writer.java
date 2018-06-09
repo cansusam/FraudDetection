@@ -33,7 +33,8 @@ public class Writer extends AbstractActor {
      * Add new transaction info as a line into the csv file
      */
     static public class transactionAddLine{
-        public transactionAddLine(TransactionListElement lineInfo) throws IOException {
+        public transactionAddLine(TransactionListElement lineInfo, CardBalanceListElement cardInfo,
+                                  TerminalListElement terminalInfo) throws IOException {
 
             String line = lineInfo.cardID
                     + "," + lineInfo.terminalID
@@ -41,7 +42,13 @@ public class Writer extends AbstractActor {
                     + "," + lineInfo.balance
                     + "," + lineInfo.remaining
                     + "," + lineInfo.validity
-                    + "," + lineInfo.date;
+                    + "," + lineInfo.date
+                    + "," + cardInfo.cardType.toString()
+                    + "," + cardInfo.limit
+                    + "," + cardInfo.homeLocationToString()
+                    + "," + terminalInfo.terminalType.toString()
+                    + "," + terminalInfo.terminalLocation()
+                    + "," + terminalInfo.merchantName();
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.append("\n"+line);
@@ -59,7 +66,8 @@ public class Writer extends AbstractActor {
             if(!folder.exists())
                 folder.mkdir();
             // CSV file headlines
-            String headlines = "CardID,TerminalID,Amount,Balance,Remaining,Validity,Date";
+            String headlines = "CardID,TerminalID,Amount,Balance,Remaining,Validity,Date,CardType,CardLimit," +
+                    "CardLocation,TerminalType,TerminalLocation,MerchantName";
             // File name with date/time
             DateFormat df = new SimpleDateFormat("yyyyMMdd-HHmmss");
             df.setTimeZone(TimeZone.getTimeZone("GMT+3"));

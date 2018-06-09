@@ -3,13 +3,6 @@ package com.lightbend.akka.sample;
 public class Constants {
 
     /**
-     * atmLimit
-     *
-     * terminalNumber
-     *
-     * cardNumber
-     *
-     * amountList
      *
      * numberOfTransactions
      *
@@ -36,8 +29,8 @@ public class Constants {
     //
     public static final int atmLimit = 81; // total ATM number 80 Local + 1 International
     public static final int merchantLimit = 5;
-    public static final int terminalNumber = 160;
-    public static final int cardNumber = 1000;
+    public static final int terminalNumber = 200;
+    public static final int cardNumber = 100;
     public static final int amountList[] = {100,1000,10000};
 
     // Time and Scheduling
@@ -54,6 +47,6 @@ public class Constants {
     public static final int maxValueOfStatementDay = 28;
 
     // Simulation mode constants
-    public static boolean endlessSimulationON = true;
+    public static boolean endlessSimulationON = false;
     public static final int numberOfTransactions = 1000;
 }

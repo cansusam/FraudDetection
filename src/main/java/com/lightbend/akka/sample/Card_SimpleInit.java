@@ -17,8 +17,8 @@ public class Card_SimpleInit extends AbstractActor {
     // used to catch unknown messages sent to this actor
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
-    static public Props props() {
-        return Props.create(Card_SimpleInit.class, () -> new Card_SimpleInit());
+    static public Props props(Integer cardID) {
+        return Props.create(Card_SimpleInit.class, () -> new Card_SimpleInit(cardID));
     }
 
     /**
@@ -52,16 +52,14 @@ public class Card_SimpleInit extends AbstractActor {
         }
     }
 
-    private static Integer idCounter = 0;
     public final Integer id;
     public final Integer limit;
     public final Kind.cardKind type;
     public final Integer homeLocation;
     public final Integer statementDate; // day of the month (for credit cards)
 
-    public Card_SimpleInit() {
-        this.id = idCounter; // each Card will have unique ID
-        idCounter++;
+    public Card_SimpleInit(Integer cardID) {
+        this.id = cardID;
 
         // kind of the card, 50/50
         if(Math.random() < 0.5) {
@@ -78,7 +76,7 @@ public class Card_SimpleInit extends AbstractActor {
             this.limit = cardLimitPool[limitSelection()]; // Monthly limit
             this.statementDate = rn.nextInt(maxValueOfStatementDay) + 1;
         }
-        this.homeLocation = rn.nextInt(atmLimit + 1); // 81 for International
+        this.homeLocation = rn.nextInt(atmLimit); // 81 for International
     }
 
     /**
@@ -123,11 +121,12 @@ public class Card_SimpleInit extends AbstractActor {
         return receiveBuilder()
                 .match(Transaction.class, x -> {
                     // Send message of transaction to the related terminal
-                    x.terminalActor.tell(new receivedAmount(x.amount,this,x.transactionListActor), getSelf());
+                    x.terminalActor.tell(new receivedAmount(x.amount,id,x.transactionListActor), getSelf());
                 })
                 .match(recordToList.class, list ->{
                     String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());
-                    list.transactionList.tell(new receivedCardInitialization(limit,id,timeStamp),getSelf());
+                    list.transactionList.tell(new receivedCardInitialization(limit,id,timeStamp,type,statementDate,
+                            homeLocation),getSelf());
                 })
                 .matchAny(o -> log.info("received unknown message"))
                 .build();

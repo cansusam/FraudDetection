@@ -26,18 +26,27 @@ public class Terminal_idInit extends AbstractActor {
      */
     static public class receivedAmount {
         public final Integer amount;
-        public final Card_SimpleInit cardRef;
+        public final Integer cardID;
         private ActorRef transactionList;
 
-        public receivedAmount(Integer amount, Card_SimpleInit cardRef, ActorRef transactionList) {
+        public receivedAmount(Integer amount, Integer cardID, ActorRef transactionList) {
             this.amount = amount;
-            this.cardRef = cardRef;
+            this.cardID = cardID;
             this.transactionList = transactionList;
         }
     }
 
-//    private static Integer idCounter = 0;
-//    private static Integer atmCounter = 0;
+    /**
+     * Message: Record terminals to the list in transactionlist actor right after initializing the terminal.
+     * This list only keeps all card information with their balance value.
+     */
+    static public class recordToList {
+        private ActorRef transactionList;
+        public recordToList(ActorRef transactionList) {
+            this.transactionList = transactionList;
+        }
+    }
+
     private final Integer id;
     private final Kind.terminalKind type;
     private final Integer location;
@@ -69,9 +78,13 @@ public class Terminal_idInit extends AbstractActor {
                     // + received.cardID.toString());
                     String timeStamp = TimeConverter.returnTime(System.currentTimeMillis());
                     // Direct to the TransactionList // possible to do it directly from card
-                    received.transactionList.tell(new receivedTransaction(received.amount,received.cardRef,id,timeStamp),
+                    received.transactionList.tell(new receivedTransaction(received.amount,received.cardID,id,timeStamp),
                             getSelf());
                 }) // when request received, this message triggered
+                .match(recordToList.class, list ->{
+                    TerminalListElement terminalInfo = new TerminalListElement(id,type,merchantCategory);
+                    list.transactionList.tell(new TransactionList.receivedTerminalInitialization(terminalInfo),getSelf());
+                })
                 .matchAny(o -> log.info("received unknown message")) // if non of the messages match
                 .build();
     }

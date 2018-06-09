@@ -25,7 +25,7 @@ public class basicTransaction_SimpleInit {
             final List<ActorRef> terminalList = new ArrayList<ActorRef>();
             final List<ActorRef> cardList = new ArrayList<ActorRef>();
 
-            generateTerminals(terminalList,system);
+            generateTerminals(terminalList,transactions,system);
             generateCards(cardList,transactions,system);
 
             if(endlessSimulationON)
@@ -53,7 +53,7 @@ public class basicTransaction_SimpleInit {
      * @param terminalList
      * @param system
      */
-    public static void generateTerminals(List<ActorRef> terminalList, ActorSystem system){
+    public static void generateTerminals(List<ActorRef> terminalList, ActorRef transactions, ActorSystem system){
         int atmNumber = 0;
         int posNumber = 0;
         int terminalID;
@@ -69,6 +69,7 @@ public class basicTransaction_SimpleInit {
                 posNumber++;
             }
             terminalList.add(system.actorOf(Terminal_idInit.props(terminalID,type)));
+            terminalList.get(i).tell(new Terminal_idInit.recordToList(transactions),ActorRef.noSender());
         }
     }
 
@@ -81,7 +82,7 @@ public class basicTransaction_SimpleInit {
      */
     public static void generateCards(List<ActorRef> cardList, ActorRef transactions, ActorSystem system){
         for (int i = 0; i < cardNumber; i++) {
-            cardList.add(system.actorOf(Card_SimpleInit.props()));
+            cardList.add(system.actorOf(Card_SimpleInit.props(i)));
             cardList.get(i).tell(new Card_SimpleInit.recordToList(transactions),ActorRef.noSender());
         }
     }
