@@ -3,7 +3,7 @@ package com.lightbend.akka.sample;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
-import com.lightbend.akka.sample.Terminal_idInit.receivedAmount;
+import com.lightbend.akka.sample.TerminalActor.receivedAmount;
 import com.lightbend.akka.sample.TransactionList.receivedCardInitialization;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
@@ -13,12 +13,12 @@ import java.util.Random;
 import static com.lightbend.akka.sample.Constants.*;
 
 //#Cart-messages
-public class Card_SimpleInit extends AbstractActor {
+public class CardActor extends AbstractActor {
     // used to catch unknown messages sent to this actor
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
     static public Props props(Integer cardID) {
-        return Props.create(Card_SimpleInit.class, () -> new Card_SimpleInit(cardID));
+        return Props.create(CardActor.class, () -> new CardActor(cardID));
     }
 
     /**
@@ -58,7 +58,7 @@ public class Card_SimpleInit extends AbstractActor {
     public final Integer homeLocation;
     public final Integer statementDate; // day of the month (for credit cards)
 
-    public Card_SimpleInit(Integer cardID) {
+    public CardActor(Integer cardID) {
         this.id = cardID;
 
         // kind of the card, 50/50

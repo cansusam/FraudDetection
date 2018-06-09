@@ -11,11 +11,11 @@ import java.util.Random;
 
 import static com.lightbend.akka.sample.Constants.*;
 
-public class Terminal_idInit extends AbstractActor {
+public class TerminalActor extends AbstractActor {
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
     static public Props props(Integer id, Kind.terminalKind type) {
-        return Props.create(Terminal_idInit.class, () -> new Terminal_idInit(id,type));
+        return Props.create(TerminalActor.class, () -> new TerminalActor(id,type));
     }
 
     /**
@@ -57,7 +57,7 @@ public class Terminal_idInit extends AbstractActor {
      * Id assignment with argument is a temporary solution.
      * @param id
      */
-    public Terminal_idInit(Integer id, Kind.terminalKind type) {
+    public TerminalActor(Integer id, Kind.terminalKind type) {
         this.id = id;
         this.type = type;
         if(type == Kind.terminalKind.ATM)

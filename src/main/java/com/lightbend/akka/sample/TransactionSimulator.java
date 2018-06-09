@@ -11,7 +11,7 @@ import java.util.Random;
 
 import static com.lightbend.akka.sample.Constants.*;
 
-public class basicTransaction_SimpleInit {
+public class TransactionSimulator {
 
     public static void main(String[] args) {
         final ActorSystem system = ActorSystem.create("transactions");
@@ -68,8 +68,8 @@ public class basicTransaction_SimpleInit {
                 terminalID = posNumber + atmLimit;
                 posNumber++;
             }
-            terminalList.add(system.actorOf(Terminal_idInit.props(terminalID,type)));
-            terminalList.get(i).tell(new Terminal_idInit.recordToList(transactions),ActorRef.noSender());
+            terminalList.add(system.actorOf(TerminalActor.props(terminalID,type)));
+            terminalList.get(i).tell(new TerminalActor.recordToList(transactions),ActorRef.noSender());
         }
     }
 
@@ -82,8 +82,8 @@ public class basicTransaction_SimpleInit {
      */
     public static void generateCards(List<ActorRef> cardList, ActorRef transactions, ActorSystem system){
         for (int i = 0; i < cardNumber; i++) {
-            cardList.add(system.actorOf(Card_SimpleInit.props(i)));
-            cardList.get(i).tell(new Card_SimpleInit.recordToList(transactions),ActorRef.noSender());
+            cardList.add(system.actorOf(CardActor.props(i)));
+            cardList.get(i).tell(new CardActor.recordToList(transactions),ActorRef.noSender());
         }
     }
 
@@ -111,7 +111,7 @@ public class basicTransaction_SimpleInit {
         else
             randomDuration = schedulingDurationsMS[rn.nextInt(schedulingDurationsMS.length)];
         system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
-                () -> cardList.get(randomCard).tell(new Card_SimpleInit.Transaction(amountList[randomAmount],
+                () -> cardList.get(randomCard).tell(new CardActor.Transaction(amountList[randomAmount],
                         terminalList.get(randomTerminal),transactions),ActorRef.noSender()), system.dispatcher());
     }
 
