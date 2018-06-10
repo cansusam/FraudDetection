@@ -171,7 +171,7 @@ public class TransactionSimulator {
      * For each user, different feature distributions are generated.
      */
     public static void recordFeatureDistributions() {
-        for (int j = 0; j < cardNumber; j++) {
+        for (int j = 0; j < distributionNumber; j++) {
             List<IntegerDistribution> featureDistributions = new ArrayList<IntegerDistribution>();
             featureDistributions.add(generateDistributions(amountList));
             featureDistributions.add(generateDistributions(schedulingDurationsMS));
@@ -211,12 +211,14 @@ public class TransactionSimulator {
         Random rn = new Random();
         int randomCard = rn.nextInt(cardNumber); // cards selected uniformly
 
-        int randomAmount = cardFeatureDistributions.get(randomCard).get(0).sample();
-        int randomDuration = cardFeatureDistributions.get(randomCard).get(1).sample();
-        int randomTerminal = cardFeatureDistributions.get(randomCard).get(2).sample();
+        int randomDistribution =  randomCard%distributionNumber;
+
+        int randomAmount = cardFeatureDistributions.get(randomDistribution).get(0).sample();
+        int randomDuration = cardFeatureDistributions.get(randomDistribution).get(1).sample();
+        int randomTerminal = cardFeatureDistributions.get(randomDistribution).get(2).sample();
 
         int valid;
-        valid = isTransactionValid(randomCard,randomAmount,randomDuration,randomTerminal);
+        valid = isTransactionValid(randomDistribution,randomAmount,randomDuration,randomTerminal);
 
         system.scheduler().scheduleOnce(Duration.ofMillis(randomDuration),
                 () -> cardList.get(randomCard).tell(new CardActor.ValidTransaction(randomAmount,
@@ -230,13 +232,13 @@ public class TransactionSimulator {
      * @param terminal
      * @return
      */
-    public static int isTransactionValid(int cardId, int amount, int duration,int terminal) {
-        if(validRanges.amountLowerLimits[cardId] <= amount
-                && validRanges.amountUpperLimits[cardId] >= amount
-                && validRanges.schedulingLowerLimits[cardId] <= duration
-                && validRanges.schedulingUpperLimits[cardId] >= duration
-                && validRanges.terminalLowerLimits[cardId] <= terminal
-                && validRanges.terminalUpperLimits[cardId] >= terminal)
+    public static int isTransactionValid(int distribution, int amount, int duration,int terminal) {
+        if(validRanges.amountLowerLimits[distribution] <= amount
+                && validRanges.amountUpperLimits[distribution] >= amount
+                && validRanges.schedulingLowerLimits[distribution] <= duration
+                && validRanges.schedulingUpperLimits[distribution] >= duration
+                && validRanges.terminalLowerLimits[distribution] <= terminal
+                && validRanges.terminalUpperLimits[distribution] >= terminal)
             return 1;
         return 0;
 
@@ -303,7 +305,7 @@ public class TransactionSimulator {
     public static void endlessSimulation(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                          ActorRef transactions) throws IOException{
         do {
-            if(multiVariateON){
+            if(discreteDistroON){
                 rangeGeneration();
                 recordFeatureDistributions();
                 discreteSchedulingTransactions(system,cardList,terminalList,transactions);
@@ -325,7 +327,7 @@ public class TransactionSimulator {
     public static void limitedTransactions(ActorSystem system, List<ActorRef> cardList, List<ActorRef> terminalList,
                                            ActorRef transactions){
         for (int i=0; i<numberOfTransactions; i++) {
-            if(multiVariateON){
+            if(discreteDistroON){
                 rangeGeneration();
                 recordFeatureDistributions();
                 discreteSchedulingTransactions(system,cardList,terminalList,transactions);

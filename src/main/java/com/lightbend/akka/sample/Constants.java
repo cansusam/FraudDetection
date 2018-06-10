@@ -9,13 +9,13 @@ public class Constants {
     // Simulation
     public static final int atmLimit = 81; // total ATM number 80 Local + 1 International
     public static final int merchantLimit = 5;
-    public static final int terminalNumber = 10;
-    public static final int cardNumber = terminalNumber*10;
+    public static final int terminalNumber = 120;
+    public static final int cardNumber = terminalNumber*1000;
     public static final int amountList[] = {100,500,1000,2000,3000,4000,5000,7000,10000,12000};
 
     // Simulation mode constants
     public static boolean endlessSimulationON = false;
-    public static final int numberOfTransactions = 100;
+    public static final int numberOfTransactions = 100000;
 
     // Time and Scheduling
     public static final int schedulingDurationsMS[] = {10,100,500,1000,2000,3000,4000,7000,8000,10000};
@@ -53,10 +53,19 @@ public class Constants {
      * Gaussian distributed values for scheduling and terminal selection
      */
     public static final boolean gaussDistroON = false;
-    public static final boolean multiVariateON = true;
+    /**
+     * Discrete distributed values for scheduling and terminal selection
+     */
+    public static final boolean discreteDistroON = true;
     public static final int distributedFeatureNumber = 3;
+    /**
+     * Ratio of non-fraudulent transactions
+     */
     public static final double windowRatio = 0.7;
-
+    /**
+     * Number of distributions
+     */
+    public static final int distributionNumber = 100;
 
 
 }
