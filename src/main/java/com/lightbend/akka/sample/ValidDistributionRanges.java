@@ -1,5 +1,9 @@
 package com.lightbend.akka.sample;
 import static com.lightbend.akka.sample.Constants.*;
+
+/**
+ * Each card (user) has different ranges for its not fraudulent use.
+ */
 public class ValidDistributionRanges {
 
     public Integer[] amountUpperLimits = new Integer[cardNumber];

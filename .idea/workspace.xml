@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89801260-26c3-4201-a298-329b97b0e6d3" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,7 +46,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -56,11 +58,20 @@
       <file leaf-file-name="CardActor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2363">
+            <state relative-caret-position="815">
               <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ValidDistributionRanges.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="63" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -85,7 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>card</find>
       <find>terminalActor</find>
       <find>termi</find>
       <find>i</find>
@@ -115,6 +125,7 @@
       <find>isv</find>
       <find>validTra</find>
       <find>cardNumber</find>
+      <find>validdistr</find>
     </findStrings>
     <replaceStrings>
       <replace>writer</replace>
@@ -162,11 +173,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionListElement.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Writer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TerminalActor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/TransactionSimulator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java" />
       </list>
     </option>
   </component>
@@ -188,6 +199,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -227,7 +239,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -419,7 +430,8 @@
       <workItem from="1528353359847" duration="26055000" />
       <workItem from="1528442333412" duration="31368000" />
       <workItem from="1528520335980" duration="42867000" />
-      <workItem from="1528629303670" duration="498000" />
+      <workItem from="1528629303670" duration="857000" />
+      <workItem from="1528630324566" duration="192000" />
     </task>
     <servers />
   </component>
@@ -456,7 +468,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107191000" />
+    <option name="totallyTimeSpent" value="107742000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -469,34 +481,35 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32859176" />
       <window_info anchor="right" id="sbt" order="10" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info id="Image Layers" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32859176" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2802276" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33997154" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.24798061" />
-      <window_info anchor="bottom" id="sbt-shell-toolwindow" order="7" weight="0.32859176" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Gradle" order="7" />
       <window_info id="Structure" order="1" sideWeight="0.5011601" side_tool="true" weight="0.25767368" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.46372688" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32859176" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32859176" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2802276" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.33997154" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.25201938" />
+      <window_info anchor="bottom" id="sbt-shell-toolwindow" order="7" weight="0.32859176" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
+      <window_info anchor="right" id="Gradle" order="7" />
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.46372688" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.32859176" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -747,13 +760,6 @@ Date a = new Date(milliseconds)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.12/2.5.13/akka-actor_2.12-2.5.13.jar!/akka/util/JavaDurationConverters.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -772,16 +778,6 @@ Date a = new Date(milliseconds)</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
           <caret line="319" column="32" selection-start-line="319" selection-start-column="32" selection-end-line="319" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -819,6 +815,23 @@ Date a = new Date(milliseconds)</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/CardActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="815">
+          <caret line="154" column="58" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/lightbend/akka/sample/ValidDistributionRanges.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="63" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
         </state>
       </provider>
     </entry>
