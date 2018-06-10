@@ -28,13 +28,14 @@ mapping = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'POS': 0, 'ATM': 1,
 
 dfTrain = dfTrain.replace(mapping)
 
-plt.figure(figsize=(15, 8))
+plt.figure(figsize=(15, 10))
 pal = sns.color_palette()
 uniques = [len(dfTrain[col].unique()) for col in variables]
 sns.set(font_scale=1.2)
 ax = sns.barplot(variables, uniques, palette=pal, log=True)
 ax.set(xlabel='Feature', ylabel='log(unique count)', title='Number of unique values per feature')
-for p, uniq in zip(ax.patches, uniques):
+for xt, p, uniq in zip(ax.get_xticklabels(), ax.patches, uniques):
+    xt.set_rotation(45)
     height = p.get_height()
     ax.text(p.get_x()+p.get_width()/2.,
             height + 10,
@@ -54,7 +55,8 @@ for i in range(0, len(variables)):
 plt.clf()
 ax = sns.barplot(variables, model.feature_importances_, palette=pal, log=True)
 ax.set(xlabel='Feature', ylabel='log(unique count)', title='Feature Importance for XGB')
-for p, uniq in zip(ax.patches, model.feature_importances_):
+for xt, p, uniq in zip(ax.get_xticklabels(), ax.patches, model.feature_importances_):
+    xt.set_rotation(45)
     height = p.get_height()
     ax.text(p.get_x()+p.get_width()/2.,
             height + 10,
