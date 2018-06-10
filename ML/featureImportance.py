@@ -53,7 +53,7 @@ for i in range(0, len(variables)):
 
 plt.clf()
 ax = sns.barplot(variables, model.feature_importances_, palette=pal, log=True)
-ax.set(xlabel='Feature', ylabel='log(unique count)', title='Feature Importance for DTC')
+ax.set(xlabel='Feature', ylabel='log(unique count)', title='Feature Importance for XGB')
 for p, uniq in zip(ax.patches, model.feature_importances_):
     height = p.get_height()
     ax.text(p.get_x()+p.get_width()/2.,
