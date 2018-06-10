@@ -1,13 +1,21 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from itertools import groupby
+from xgboost import XGBClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
 
 from sklearn.tree import DecisionTreeClassifier
 
-clfDT = DecisionTreeClassifier()
+# model = DecisionTreeClassifier()
+model = XGBClassifier()
+
 
 trainingDataNumber = 90000
 testDataNumber = 10000
+classNumber = 2
 
 dfTrain = pd.read_csv("transactions.csv", nrows=trainingDataNumber+1, parse_dates=['Date'])
 dfTest = pd.read_csv('transactions.csv', skiprows=range(1, trainingDataNumber), nrows=testDataNumber, parse_dates=['Date'])
@@ -65,14 +73,12 @@ dfTest['predictionsP1'] = testPredictions[:,1]
 variables.extend(['predictionsP0', 'predictionsP1'])
 '''
 
-
-
 dfTrain = np.array(dfTrain[variables])
 dfTest = np.array(dfTest[variables])
 
 
-clfDT = clfDT.fit(dfTrain, notFraudulentTrain)
-predictions = clfDT.predict(dfTest)
+model = model.fit(dfTrain, notFraudulentTrain)
+predictions = model.predict(dfTest)
 
 correctClassifications = 0
 for x in range(0, predictions.shape[0]):
@@ -85,3 +91,21 @@ print("Naive bias test data accuracy: ")
 print(float("%0.3f" % (100 * correctRatio)), "%")
 print("Naive bias test data overall error: ")
 print(float("%0.3f" % (100 * (1 - correctRatio))), "%")
+
+freq = np.array([len(list(group)) for key, group in groupby(notFraudulentTest)])
+
+# confusion matrix calculation
+confusionMatrix = np.zeros((classNumber,classNumber));
+for x in range(0,testDataNumber):
+    prediction = int(predictions[x]);
+    actual = int(notFraudulentTest[x]);
+    confusionMatrix[actual,prediction] = confusionMatrix[actual,prediction] + 1/freq[actual];
+
+# plot confusion matrix
+fig, ax1 = plt.subplots(1,1)
+ax1.imshow(confusionMatrix, cmap='Blues', alpha=.9,interpolation='nearest')
+ax1.set_xticks(np.arange(0, classNumber, 1))
+ax1.set_yticks(np.arange(0, classNumber, 1))
+fig.suptitle("Confusion Matrix")
+fig.savefig("Confusion Matrix")
+plt.show()

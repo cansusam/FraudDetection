@@ -9,6 +9,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticD
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
+from xgboost import XGBClassifier
+import lightgbm as lgb
 
 
 trainingDataNumber = 100000
@@ -46,7 +48,9 @@ models.append(('CART ', DecisionTreeClassifier()))
 models.append(('NB ', GaussianNB()))
 models.append(('KNN ', KNeighborsClassifier()))
 models.append(('MLP ', MLPClassifier()))
-models.append(('SVC ', SVC()))
+models.append(('XGB ', XGBClassifier()))
+# models.append(('LGB ', lgb()))
+# models.append(('SVC ', SVC()))
 
 # evaluate each model in turn
 results = []
