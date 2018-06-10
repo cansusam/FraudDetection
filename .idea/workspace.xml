@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89801260-26c3-4201-a298-329b97b0e6d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="89801260-26c3-4201-a298-329b97b0e6d3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -460,7 +458,7 @@
       <workItem from="1528520335980" duration="42867000" />
       <workItem from="1528629303670" duration="857000" />
       <workItem from="1528630324566" duration="393000" />
-      <workItem from="1528631517974" duration="2098000" />
+      <workItem from="1528631517974" duration="2422000" />
     </task>
     <servers />
   </component>
@@ -497,7 +495,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110041000" />
+    <option name="totallyTimeSpent" value="110365000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -510,7 +508,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="sbt" order="10" />
@@ -530,8 +527,8 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32859176" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2802276" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.23897582" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.25605816" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.23897582" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4988399" visible="true" weight="0.25605816" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="7" weight="0.32859176" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32859176" />
       <window_info anchor="right" id="Gradle" order="7" />
