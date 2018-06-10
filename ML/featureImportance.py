@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 from sklearn.tree import DecisionTreeClassifier
+from xgboost import XGBClassifier
 import matplotlib.pyplot as plt
 
-clfDT = DecisionTreeClassifier()
 
 trainingDataNumber = 100000
 
@@ -45,7 +45,7 @@ plt.savefig('uniqueness.png')
 dfTrain = np.array(dfTrain[variables])
 
 # feature extraction
-model = DecisionTreeClassifier()
+model = XGBClassifier()
 model.fit(dfTrain, notFraudulentTrain)
 
 for i in range(0, len(variables)):
@@ -60,4 +60,4 @@ for p, uniq in zip(ax.patches, model.feature_importances_):
             height + 10,
             uniq,
             ha="center")
-plt.savefig('featureImportance.png')
+plt.savefig('featureImportance_XGB.png')
