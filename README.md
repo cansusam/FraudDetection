@@ -1,7 +1,7 @@
 # Tazi Project
 
-The goal is to create time series of transactions using a simulated world.
-These are credit or debit card transactions on terminals.
+The goal is to create time series of transactions using a simulated world.  
+These are credit or debit card transactions on terminals.  
 The ratio of terminals to cards is 1 to 1000.
 
 ## Details
@@ -28,10 +28,10 @@ A transaction is represented by the following:
 
 ## Task 1
 
-Implement this world using Akka Actors.
-Your code must be able to generate an infinite stream of transaction data, in real or accelerated time.
-Make sure that your code is documented
-Test your code using test cases
+Implement this world using Akka Actors.  
+Your code must be able to generate an infinite stream of transaction data, in real or accelerated time.  
+Make sure that your code is documented.  
+Test your code using test cases.
 
 ## Task 2
 
@@ -43,11 +43,18 @@ Implement the features and a simple prediction model.
 
 ## Test Cases
 
-In Progress...
+[DONE]
+* Single terminal, single card
+* Single terminal, multiple cards (100000)
+* Multiple terminal (1000), multiple cards (100000)
+* Artificial Training Dataset Generation (Uniform/Gaussian/DiscreteMix)
+
+[WAITING]
+* Scheduled initialization of cards/terminals.
 
 ## Built With
 
-* [Akka](https://akka.io) - The Akka Actors used
+* [Akka](https://akka.io) - Actor Model
 * [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Author
